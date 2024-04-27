@@ -1,14 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-export default function HomePage() {
+export default function Calendar() {
   return (
     <View>
-      <Text>Home Page</Text>
+      <Text>Calendar</Text>
     </View>
   )
 }
 
-const styles = StyleSheet.create({
-  
-})
+const styles = StyleSheet.create({})
