@@ -9,7 +9,7 @@ export default function RecipeCard({ recipe }) {
   }
 
   return (
-    <View style={{ height: 234 }}>
+    <View style={{ height: 200 }}>
       <View
         style={{
           justifyContent: "flex-start",

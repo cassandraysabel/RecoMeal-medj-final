@@ -4,12 +4,10 @@ import RecipeCard from './RecipeCard'
 
 export default function RecipeList({ recipes }) {
   return (
-    <ScrollView>
+    <ScrollView horizontal  >
       {recipes.map((recipe) => (
         <RecipeCard key={recipe.recipe.label} recipe={recipe} />
       ))}
     </ScrollView>
   )
 }
-
-const styles = StyleSheet.create({})
