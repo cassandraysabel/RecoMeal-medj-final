@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity, FlatList, StyleSheet, Linking, KeyboardAvoidingView } from 'react-native';
+import Index from '../..';
 
 const About = () => {
   const [comment, setComment] = useState('');
@@ -45,6 +46,8 @@ const About = () => {
   };
 
   return (
+    <View>
+    <Image source={require("../../../assets/abt-bg.png")} style={styles.abtimg}/>
     <KeyboardAvoidingView style={styles.container} behavior="height">
       <Text style={styles.about}>MEET THE TEAM</Text>
       <View style={styles.developersContainer}>
@@ -84,6 +87,7 @@ const About = () => {
         <Text style={styles.submitButtonText}>Submit</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
+    </View>
   );
 };
 
@@ -99,7 +103,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
-    marginTop: 23, // Adjusted top margin
+    marginTop: 23,
+  },
+  abtimg:{
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+
   },
   feedback: {
     fontSize: 20,
