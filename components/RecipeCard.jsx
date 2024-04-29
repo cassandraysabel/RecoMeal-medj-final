@@ -63,6 +63,7 @@ export default function RecipeCard({ recipe }) {
               alignItems: "center",
               justifyContent: "center",
               borderRadius: 10,
+              marginBottom: 8
             }}
           >
             <View

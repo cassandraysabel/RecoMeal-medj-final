@@ -129,7 +129,7 @@ export default function HomePage() {
       
       <RecipeList recipes={createdRecipes} />
 
-      {/* Tags section */}
+      {/* Tags */}
       <View style={styles.tagContainer}>
         <View style={styles.text}>
           <Text style={{ color: "#333A73", fontSize: 24, fontWeight: 'bold' }}>What are you in the </Text>
