@@ -18,11 +18,6 @@ export default function FavoritesScreen() {
         />
         <Text style={[(styles.favText), { zIndex: 2 }]}>Favorites</Text>
       </View>
-
-
-
-
-
     </View>
   );
 }
