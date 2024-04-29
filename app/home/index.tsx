@@ -12,10 +12,12 @@ import React from "react";
 import { assets } from "../../components/assets";
 import RecipeList from "../../components/RecipeList";
 import { UserDataContext, useDataContext } from "../../components/context";
+import { Link } from "expo-router";
 
 const ScreenWidth = Dimensions.get("window").width;
 export default function HomePage() {
   const { createdRecipes } = useDataContext();
+
 
   return (
     <View style={styles.container}>
@@ -23,7 +25,7 @@ export default function HomePage() {
         <View>
           <Image
             source={assets.gradient}
-            style={{ position: "absolute" }}
+            style={{ position: "absolute", marginTop: 2 }}
           ></Image>
         </View>
         <View style={styles.abtnprem}>
@@ -42,10 +44,13 @@ export default function HomePage() {
               PREMIUM
             </Text>
           </Text>
+          <Link href={"/home/about"}>
           <Text style={{ fontSize: 15, fontWeight: "bold", color: "#333A73" }}>
             {" "}
             ABOUT{" "}
           </Text>
+          </Link>
+          
         </View>
         <View style={styles.headerbottom}>
           <View>
@@ -74,12 +79,12 @@ export default function HomePage() {
           <Pressable style={{ paddingBottom: 10 }}>
             <Text>Add</Text>
           </Pressable>
-          <View>
+          <View style={{paddingRight: 10, }}>
             <View
               style={{
-                backgroundColor: "red",
-                width: 75,
-                height: 75,
+                backgroundColor: "white",
+                width: 80,
+                height: 80,
                 borderRadius: 100,
                 alignItems: "center",
                 justifyContent: "flex-end",
@@ -92,14 +97,25 @@ export default function HomePage() {
             </View>
           </View>
         </View>
-      </View>
-      <View
+      </View> 
+
+      <Text
         style={{
-          paddingTop: 50,
+          color: "#333A73",
+          fontSize:20,
+          fontWeight: "bold",
+          marginLeft: 10,
+          marginTop: 20,
         }}
-      ></View>
+        >
+        Choose your Recipe
+        </Text>
+      
       <RecipeList recipes={createdRecipes} />
+      
     </View>
+
+
   );
 }
 
@@ -120,6 +136,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignContent: "flex-start",
     top: 20,
+    marginTop: 20
   },
   headerbottom: {
     flexDirection: "row",

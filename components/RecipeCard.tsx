@@ -1,6 +1,7 @@
 import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { assets } from './assets';
+import { ScrollView } from 'react-native';
 
 export default function RecipeCard({ recipe }) {
 
@@ -34,7 +35,7 @@ export default function RecipeCard({ recipe }) {
             marginTop: 10,
             marginBottom: 5,
             borderRadius: 15,
-          }} // Adjust width/height as needed
+          }} 
         />
         <View style={{ alignItems: "center", justifyContent: "center" }}>
           <Text

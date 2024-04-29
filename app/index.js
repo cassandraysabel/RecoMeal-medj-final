@@ -4,12 +4,12 @@ import { Link } from "expo-router";
 
 export default function Index() {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Welcome to RecoMeal</Text>
       <Pressable>
         <Link href={"/auth/login"}>
             <Text>
-                Log in na gaga
+                Log in na
             </Text>
         </Link>
       </Pressable>
@@ -17,4 +17,10 @@ export default function Index() {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+})

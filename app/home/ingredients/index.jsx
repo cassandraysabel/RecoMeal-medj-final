@@ -172,18 +172,14 @@ export default function Ingredients() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-          <Image
-        source={assets.gradient}
-        style={[styles.gradientimage, { zIndex: 1 }]}
-      />
-      <Image source={assets["ingredients-bg"]} resizeMode="cover"
-            style={styles.bgimage
-          }
-          />
-      <Text style={styles.ingredientsText}>Ingredients</Text>
+        <Image source={assets.gradient} style={{ zIndex: 1 }} />
+        <Image
+          source={assets["ingredients-bg"]}
+          resizeMode="cover"
+          style={styles.bgimage}
+        />
+        <Text style={styles.ingredientsText}>Ingredients</Text>
       </View>
-      
-      
       <View style={styles.content}>
         <ScrollView style={styles.scrollContainer}>
           {ingredients.map((text, index) => (
@@ -538,7 +534,7 @@ const styles = StyleSheet.create({
     left: 0,
     bottom: 0,
     width: 300,
-    height: 200
+    height: 200,
   },
 
   ingredientsText: {
@@ -546,7 +542,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     position: "absolute",
-    right: 10
+    right: 10,
   },
 
   overlay: {
