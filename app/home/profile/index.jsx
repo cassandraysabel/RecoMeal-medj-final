@@ -9,6 +9,7 @@ export default function Profile() {
       <Link href={"auth/login"} >
         <Text>Log out</Text>
       </Link>
+      
     </View>
   )
 }
