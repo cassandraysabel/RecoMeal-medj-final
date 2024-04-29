@@ -5,4 +5,5 @@ export const assets = {
   premium: require("../assets/premium.png"),
   logoNoText: require("../assets/logoNoText.png"),
   "heart-icon": require("../assets/hearticon.png"),
+  
 };
