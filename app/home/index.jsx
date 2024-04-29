@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   Button,
   Dimensions,
@@ -7,17 +8,32 @@ import {
   Text,
   TextInput,
   View,
+  TouchableOpacity,
 } from "react-native";
-import React from "react";
 import { assets } from "../../components/assets";
 import RecipeList from "../../components/RecipeList";
-import { UserDataContext, useDataContext } from "../../components/context";
+import { useDataContext } from "../../components/context";
 import { Link } from "expo-router";
 
 const ScreenWidth = Dimensions.get("window").width;
+
 export default function HomePage() {
   const { createdRecipes } = useDataContext();
+  const [activeTags, setActiveTags] = useState([]);
 
+  const handleTagPress = (tag) => {
+    // Check if the tag is already active
+    const index = activeTags.indexOf(tag);
+    if (index !== -1) {
+      // Tag is active, remove it
+      setActiveTags(activeTags.filter((item) => item !== tag));
+      console.log(`Tag '${tag}' deactivated`);
+    } else {
+      // Tag is not active, add it
+      setActiveTags([...activeTags, tag]);
+      console.log(`Tag '${tag}' activated`);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -112,10 +128,48 @@ export default function HomePage() {
         </Text>
       
       <RecipeList recipes={createdRecipes} />
-      
+
+      {/* Tags section */}
+      <View style={styles.tagContainer}>
+        <View style={styles.text}>
+          <Text style={{ color: "#333A73", fontSize: 24, fontWeight: 'bold' }}>What are you in the </Text>
+          <Text style={{ color: "#FBA834", fontSize: 24, fontWeight: 'bold' }}>mood</Text>
+          <Text style={{ color: "#333A73", fontSize: 24, fontWeight: 'bold' }}> for?</Text>
+        </View>
+        <View style={styles.container}>
+          <TouchableOpacity 
+            style={[styles.button, activeTags.includes("meal") && styles.activeButton]}
+            onPress={() => handleTagPress("meal")}
+          >
+            <Text style={[styles.buttonText, activeTags.includes("meal") && styles.activeButtonText]}>meal</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={[styles.button, activeTags.includes("spicy") && styles.activeButton]}
+            onPress={() => handleTagPress("spicy")}
+          >
+            <Text style={[styles.buttonText, activeTags.includes("spicy") && styles.activeButtonText]}>spicy</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={[styles.button, activeTags.includes("noodles") && styles.activeButton]}
+            onPress={() => handleTagPress("noodles")}
+          >
+            <Text style={[styles.buttonText, activeTags.includes("noodles") && styles.activeButtonText]}>noodles</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={[styles.button, activeTags.includes("soup") && styles.activeButton]}
+            onPress={() => handleTagPress("soup")}
+          >
+            <Text style={[styles.buttonText, activeTags.includes("soup") && styles.activeButtonText]}>soup</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={[styles.button, activeTags.includes("dessert") && styles.activeButton]}
+            onPress={() => handleTagPress("dessert")}
+          >
+            <Text style={[styles.buttonText, activeTags.includes("dessert") && styles.activeButtonText]}>dessert</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
-
-
   );
 }
 
@@ -156,182 +210,47 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
   },
 
-  calendar: {
-    shadowOpacity: 0.59,
-    shadowRadius: 4.65,
-    elevation: 7,
+  tagContainer:{
+    borderColor: '#333A73',
+    borderWidth: 5,
+    margin: 10,
+    borderRadius: 16,
+    marginTop: 20,
   },
-
-  searchbar: {
-    width: 273,
-    height: 40,
-    backgroundColor: "#D9D9D9",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 15,
-    marginTop: 25,
-    marginBottom: 10,
-    paddingLeft: 5,
-    flexDirection: "row",
+  text: {
+    flexDirection: 'row',
+    alignItems: 'center', 
+    fontSize: 24,
+    fontWeight: 'bold',
+    paddingLeft: 15,
+    paddingTop: 10,
+  },
+  container: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    marginTop: 20,
   },
   button: {
-    backgroundColor: "#1F41BB",
-    borderRadius: 5,
-    height: 25,
-    width: 100,
-    alignItems: "center",
+    backgroundColor: 'white',
+    padding: 5,
+    margin: 5,
+    borderRadius: 100,
+    borderWidth: 3,
+    borderColor: '#333A73',
+    marginBottom: 13,
+  },
+  activeButton: {
+    backgroundColor: '#FBA834', 
+    borderColor: '#FBA834', 
   },
   buttonText: {
-    color: "white",
-    textAlign: "center",
-  },
-  displayContainer: {
-    width: "100%",
-    marginTop: 10,
-  },
-  displayText: {
     fontSize: 16,
+    fontWeight: 'bold',
+    
   },
-  displayItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 5,
-  },
-
-  textposition: {
-    fontSize: 12,
-    marginLeft: 5,
-  },
-
-  deleteposition: {},
-
-  image: {
-    width: 59,
-    height: 55,
-    borderRadius: 25,
-    marginLeft: 5,
-  },
-
-  rectangle: {
-    backgroundColor: "lightgray",
-    padding: 10,
-    marginBottom: 10,
-
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 15,
-    width: 358,
-    height: 69,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 1,
-    shadowRadius: 4,
-  },
-
-  scrollContainer: {
-    width: "100%",
-    marginTop: 10,
-    marginBottom: 10,
-  },
-
-  resultText: {
-    fontSize: 14,
-    color: "red",
-  },
-
-  icon_size: {
-    width: 35,
-    height: 30,
-    resizeMode: "contain",
-  },
-
-  icontainer: {
-    width: "100%",
-    height: 97,
-    position: "relative",
-    backgroundColor: "white",
-  },
-
-  bgimage: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "50%",
-    height: "12%",
-  },
-
-  gradientimage: {
-    width: "100%",
-    height: "12%",
-  },
-
-  ingredientsText: {
-    color: "#333A73",
-    fontSize: 30,
-    fontWeight: "bold",
-    opacity: 1,
-    position: "absolute",
-    top: 40,
-    right: 15,
-  },
-
-  overlay: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: ScreenWidth,
-    height: "100%",
-    justifyContent: "flex-start",
-    alignItems: "flex-end",
-  },
-
-  content: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingTop: 20,
-  },
-
-  icon: {
-    width: 35,
-    height: 30,
-    resizeMode: "contain",
-  },
-
-  icons: {
-    alignItems: "center",
-  },
-
-  descriptionText: {
-    fontSize: 10,
-    color: "white",
-  },
-
-  descriptions: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    marginBottom: 10,
-  },
-
-  navigationBar: {
-    backgroundColor: "#201E53",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 20,
-    width: ScreenWidth,
-    height: 62,
-    resizeMode: "contain",
-  },
-
-  recipe_rectangle: {
-    width: 511,
-    height: 234,
-    backgroundColor: "white",
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 5,
+  activeButtonText: {
+    color: 'white', 
   },
 });
+
