@@ -49,7 +49,6 @@ export default function RecipeCard({ recipe }) {
             {recipe.recipe.label.toUpperCase()}
           </Text>
         </View>
-
         <View
           style={{ flex: 1, justifyContent: "flex-end", paddingBottom: 10 }}
         >
