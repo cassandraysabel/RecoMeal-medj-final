@@ -5,12 +5,12 @@ import { ScrollView } from 'react-native';
 
 export default function RecipeCard({ recipe }) {
 
-  const openRecipeUrl = (url: string) => {
+  const openRecipeUrl = (url) => {
     Linking.openURL(url);
   }
 
   return (
-    <View style={{ height: 200 }}>
+    <View>
       <View
         style={{
           justifyContent: "flex-start",

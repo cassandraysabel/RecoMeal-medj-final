@@ -11,21 +11,21 @@ import { Link, router } from "expo-router";
 import axios, { AxiosError } from "axios";
 
 export default function Login() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [usernameFocused, setUsernameFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
 
   const logIn = async () => {
     try {
-      await axios.post('/api/login', {
-        username: username,
+      await axios.post('http://192.168.254.112:8081/api/login', {
+        email: email,
         password: password
       }).then((res) => {
         console.log(res);
         router.replace("/home");
       }).catch((err: AxiosError) => {
-        console.log(err)
+        console.log(err.response?.data as string);
       })
     } catch (e) {
 
@@ -37,9 +37,9 @@ export default function Login() {
       <Text style={styles.desc}>Welcome back, you've been missed!</Text>
       <TextInput
         style={[styles.input, usernameFocused && styles.inputFocused]}
-        value={username}
-        onChangeText={setUsername}
-        placeholder="Username"
+        value={email}
+        onChangeText={setEmail}
+        placeholder="Email"
         onFocus={() => setUsernameFocused(true)}
         onBlur={() => setUsernameFocused(false)}
       />
@@ -53,7 +53,7 @@ export default function Login() {
         onBlur={() => setPasswordFocused(false)}
       />
 
-      <TouchableOpacity style={styles.fpw}>
+      <TouchableOpacity style={styles.fpw} onPress={() => router.replace('/auth/fpw')}>
         <Text style={styles.fpwbtn}>Forgot your password?</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={logIn}>

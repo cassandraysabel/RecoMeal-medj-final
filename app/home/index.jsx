@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Button,
   Dimensions,
@@ -61,12 +61,13 @@ export default function HomePage() {
             </Text>
           </Text>
           <Link href={"/home/about"}>
-          <Text style={{ fontSize: 15, fontWeight: "bold", color: "#333A73" }}>
-            {" "}
-            ABOUT{" "}
-          </Text>
+            <Text
+              style={{ fontSize: 15, fontWeight: "bold", color: "#333A73" }}
+            >
+              {" "}
+              ABOUT{" "}
+            </Text>
           </Link>
-          
         </View>
         <View style={styles.headerbottom}>
           <View>
@@ -95,7 +96,7 @@ export default function HomePage() {
           <Pressable style={{ paddingBottom: 10 }}>
             <Text>Add</Text>
           </Pressable>
-          <View style={{paddingRight: 10, }}>
+          <View style={{ paddingRight: 10 }}>
             <View
               style={{
                 backgroundColor: "white",
@@ -113,59 +114,123 @@ export default function HomePage() {
             </View>
           </View>
         </View>
-      </View> 
-
-      <Text
-        style={{
-          color: "#333A73",
-          fontSize:20,
-          fontWeight: "bold",
-          marginLeft: 10,
-          marginTop: 20,
-        }}
+      </View>
+      <View style={styles.content}>
+        <Text
+          style={{
+            color: "#333A73",
+            fontSize: 20,
+            fontWeight: "bold",
+            marginLeft: 10,
+            marginTop: 20,
+          }}
         >
-        Choose your Recipe
+          Choose your Recipe
         </Text>
-      <RecipeList recipes={createdRecipes} />
+        <RecipeList recipes={createdRecipes} />
 
-      {/* Tags */}
-      <View style={styles.tagContainer}>
-        <View style={styles.text}>
-          <Text style={{ color: "#333A73", fontSize: 24, fontWeight: 'bold' }}>What are you in the </Text>
-          <Text style={{ color: "#FBA834", fontSize: 24, fontWeight: 'bold' }}>mood</Text>
-          <Text style={{ color: "#333A73", fontSize: 24, fontWeight: 'bold' }}> for?</Text>
-        </View>
-        <View style={styles.container}>
-          <TouchableOpacity 
-            style={[styles.button, activeTags.includes("meal") && styles.activeButton]}
-            onPress={() => handleTagPress("meal")}
-          >
-            <Text style={[styles.buttonText, activeTags.includes("meal") && styles.activeButtonText]}>meal</Text>
-          </TouchableOpacity>
-          <TouchableOpacity 
-            style={[styles.button, activeTags.includes("spicy") && styles.activeButton]}
-            onPress={() => handleTagPress("spicy")}
-          >
-            <Text style={[styles.buttonText, activeTags.includes("spicy") && styles.activeButtonText]}>spicy</Text>
-          </TouchableOpacity>
-          <TouchableOpacity 
-            style={[styles.button, activeTags.includes("noodles") && styles.activeButton]}
-            onPress={() => handleTagPress("noodles")}
-          >
-            <Text style={[styles.buttonText, activeTags.includes("noodles") && styles.activeButtonText]}>noodles</Text>
-          </TouchableOpacity>
-          <TouchableOpacity 
-            style={[styles.button, activeTags.includes("soup") && styles.activeButton]}
-            onPress={() => handleTagPress("soup")}
-          >
-            <Text style={[styles.buttonText, activeTags.includes("soup") && styles.activeButtonText]}>soup</Text>
-          </TouchableOpacity>
-          <TouchableOpacity 
-            style={[styles.button, activeTags.includes("dessert") && styles.activeButton]}
-            onPress={() => handleTagPress("dessert")}
-          >
-            <Text style={[styles.buttonText, activeTags.includes("dessert") && styles.activeButtonText]}>dessert</Text>
-          </TouchableOpacity>
+        {/* Tags */}
+        <View style={styles.tagContainer}>
+          <View style={styles.text}>
+            <Text
+              style={{ color: "#333A73", fontSize: 24, fontWeight: "bold" }}
+            >
+              What are you in the{" "}
+            </Text>
+            <Text
+              style={{ color: "#FBA834", fontSize: 24, fontWeight: "bold" }}
+            >
+              mood
+            </Text>
+            <Text
+              style={{ color: "#333A73", fontSize: 24, fontWeight: "bold" }}
+            >
+              {" "}
+              for?
+            </Text>
+          </View>
+          <View style={styles.container}>
+            <TouchableOpacity
+              style={[
+                styles.button,
+                activeTags.includes("meal") && styles.activeButton,
+              ]}
+              onPress={() => handleTagPress("meal")}
+            >
+              <Text
+                style={[
+                  styles.buttonText,
+                  activeTags.includes("meal") && styles.activeButtonText,
+                ]}
+              >
+                meal
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.button,
+                activeTags.includes("spicy") && styles.activeButton,
+              ]}
+              onPress={() => handleTagPress("spicy")}
+            >
+              <Text
+                style={[
+                  styles.buttonText,
+                  activeTags.includes("spicy") && styles.activeButtonText,
+                ]}
+              >
+                spicy
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.button,
+                activeTags.includes("noodles") && styles.activeButton,
+              ]}
+              onPress={() => handleTagPress("noodles")}
+            >
+              <Text
+                style={[
+                  styles.buttonText,
+                  activeTags.includes("noodles") && styles.activeButtonText,
+                ]}
+              >
+                noodles
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.button,
+                activeTags.includes("soup") && styles.activeButton,
+              ]}
+              onPress={() => handleTagPress("soup")}
+            >
+              <Text
+                style={[
+                  styles.buttonText,
+                  activeTags.includes("soup") && styles.activeButtonText,
+                ]}
+              >
+                soup
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.button,
+                activeTags.includes("dessert") && styles.activeButton,
+              ]}
+              onPress={() => handleTagPress("dessert")}
+            >
+              <Text
+                style={[
+                  styles.buttonText,
+                  activeTags.includes("dessert") && styles.activeButtonText,
+                ]}
+              >
+                dessert
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </View>
@@ -183,13 +248,14 @@ const styles = StyleSheet.create({
     position: "relative",
   },
 
+  content: {},
   abtnprem: {
     flexDirection: "row",
     alignItems: "flex-start",
     justifyContent: "space-around",
     alignContent: "flex-start",
     top: 20,
-    marginTop: 20
+    marginTop: 20,
   },
   headerbottom: {
     flexDirection: "row",
@@ -209,47 +275,44 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
   },
 
-  tagContainer:{
-    borderColor: '#333A73',
+  tagContainer: {
+    borderColor: "#333A73",
     borderWidth: 5,
     margin: 10,
     borderRadius: 16,
-    marginTop: 20,
   },
   text: {
-    flexDirection: 'row',
-    alignItems: 'center', 
+    flexDirection: "row",
+    alignItems: "center",
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     paddingLeft: 15,
     paddingTop: 10,
   },
   container: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
     marginTop: 20,
   },
   button: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     padding: 5,
     margin: 5,
     borderRadius: 100,
     borderWidth: 3,
-    borderColor: '#333A73',
+    borderColor: "#333A73",
     marginBottom: 13,
   },
   activeButton: {
-    backgroundColor: '#FBA834', 
-    borderColor: '#FBA834', 
+    backgroundColor: "#FBA834",
+    borderColor: "#FBA834",
   },
   buttonText: {
     fontSize: 16,
-    fontWeight: 'bold',
-    
+    fontWeight: "bold",
   },
   activeButtonText: {
-    color: 'white', 
+    color: "white",
   },
 });
-

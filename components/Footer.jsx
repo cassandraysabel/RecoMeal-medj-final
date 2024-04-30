@@ -51,10 +51,13 @@ export default function Footer() {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
+    width: "100%",
     height: 75,
     justifyContent: "space-around",
     backgroundColor: "#1F1E53",
-    paddingTop: 10
+    paddingTop: 10,
+    position: "absolute",
+    bottom: 0,
   },
   tab: {
     alignItems: "center", 

@@ -3,12 +3,12 @@ import crypto from "node:crypto";
 
 export const POST = async (req: Request, res: Response) => {
   try {
-    console.log("connected: 'GET' /user");
+    console.log("connected: 'POST' /user");
     const recomealDB = await connection();
 
-    const { username, password } = await req.json();
+    const { email, password } = await req.json();
 
-    console.log(username, password);
+    console.log(email, password);
 
     const secret = crypto
       .createHash("sha256")
@@ -16,44 +16,37 @@ export const POST = async (req: Request, res: Response) => {
       .digest("base64")
       .substring(0, 32);
 
-    var [users] = await recomealDB.execute(
-      `SELECT * FROM users WHERE name = ?`,
-      [username]
+    var [userData] = await recomealDB.execute(
+      `SELECT * FROM users WHERE email = ?`,
+      [email]
     );
 
-    users = users as [];
-    var user;
-
-    for (let userData of users) {
-      try {
-        const decryptIV = Buffer.from(userData["iv"], "hex");
-        console.log(userData["password"]);
-        console.log(userData["iv"]);
-        console.log(decryptIV);
-
-        const decryptPassword = crypto.createDecipheriv(
-          "aes-256-cbc",
-          secret,
-          decryptIV
-        );
-        let decrypt = decryptPassword.update(
-          userData["password"],
-          "hex",
-          "utf8"
-        );
-        decrypt += decryptPassword.final("utf8");
-
-        if (decrypt === password) {
-          user = userData;
-          break;
-        }
-      } catch (err) {
-        console.log(err, "Incorrect user");
-      }
+    console.log(userData);
+    userData = userData as [];
+    if (userData.length == 0) {
+      return new Response("Incorrect username or password.", { status: 400 });
     }
-    if (user === undefined) {
-      return new Response("Incorrect username or password.", { status: 404 });
+
+    const user = userData[0];
+
+    const decryptIV = Buffer.from(user["iv"], "hex");
+    console.log(user["password"]);
+    console.log(user["iv"]);
+    console.log(decryptIV);
+
+    const decrypt = crypto.createDecipheriv(
+      "aes-256-cbc",
+      secret,
+      decryptIV
+    );
+
+    let decryptPassword = decrypt.update(user["password"], "hex", "utf8");
+    decryptPassword += decrypt.final("utf8");
+
+    if (decryptPassword !== password) {
+      
     }
+    
 
     return Response.json(user, { status: 200 });
   } catch (err) {
