@@ -20,15 +20,14 @@ export default function SignUp() {
 
   const createAccount = async () => {
     // validate email
-    // if (email.split("@").length !== 2) {
-    //   alert("Invalid email address");
-    //   return;
-    // }
-    // if (email.split("@")[1].split(".").length < 2) {
-    //   alert("Invalid email address");
-    //   return;
-    // }
-    // validate password
+    if (email.split("@").length !== 2) {
+      alert("Invalid email address");
+      return;
+    }
+    if (email.split("@")[1].split(".").length < 2) {
+      alert("Invalid email address");
+      return;
+    }
 
     await axios
       .post(

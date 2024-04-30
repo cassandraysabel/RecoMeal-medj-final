@@ -7,7 +7,7 @@ import {
   Image,
   StyleSheet,
 } from "react-native";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import axios, { AxiosError } from "axios";
 
 export default function Login() {
@@ -22,7 +22,8 @@ export default function Login() {
         username: username,
         password: password
       }).then((res) => {
-        console.log(res)
+        console.log(res);
+        router.replace("/home");
       }).catch((err: AxiosError) => {
         console.log(err)
       })
