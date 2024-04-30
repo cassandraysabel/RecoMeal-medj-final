@@ -1,14 +1,35 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+} from "react-native";
 import { Link } from "expo-router";
+import axios, { AxiosError } from "axios";
 
 export default function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [usernameFocused, setUsernameFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
 
+  const logIn = async () => {
+    try {
+      await axios.post('/api/login', {
+        username: username,
+        password: password
+      }).then((res) => {
+        console.log(res)
+      }).catch((err: AxiosError) => {
+        console.log(err)
+      })
+    } catch (e) {
 
+    }
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Sign in Here</Text>
@@ -34,14 +55,14 @@ export default function Login() {
       <TouchableOpacity style={styles.fpw}>
         <Text style={styles.fpwbtn}>Forgot your password?</Text>
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={logIn}>
         <View style={styles.btn}>
           <Text style={styles.btnText}>Sign in</Text>
         </View>
       </TouchableOpacity>
 
       <View>
-        <Link style={styles.cna} href={"/auth/signup"}>
+        <Link href={"/auth/signup"}>
           <Text style={styles.cnabtn}>Don't have an account yet? Sign Up</Text>
         </Link>
       </View>
@@ -49,13 +70,19 @@ export default function Login() {
       <Text style={styles.orwText}>Or continue with</Text>
       <View style={styles.iconContainer}>
         <TouchableOpacity style={styles.iconWrapper}>
-          <Image style={styles.icon} source={require('../../assets/fb.png')} />
+          <Image style={styles.icon} source={require("../../assets/fb.png")} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.iconWrapper}>
-          <Image style={styles.icon} source={require('../../assets/google.png')} />
+          <Image
+            style={styles.icon}
+            source={require("../../assets/google.png")}
+          />
         </TouchableOpacity>
         <TouchableOpacity style={styles.iconWrapper}>
-          <Image style={styles.icon} source={require('../../assets/apple-logo.png')} />
+          <Image
+            style={styles.icon}
+            source={require("../../assets/apple-logo.png")}
+          />
         </TouchableOpacity>
       </View>
     </View>
@@ -65,40 +92,38 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 50,
     width: "100%",
-    height: "100%"
-
+    height: "100%",
   },
   title: {
     marginTop: 100,
     fontSize: 35,
     marginBottom: 10,
-    color: '#1F1E53',
+    color: "#1F1E53",
   },
   desc: {
-    marginBottom: 40,
     fontSize: 15,
     marginBottom: 50,
   },
   input: {
-    width: '80%',
+    width: "80%",
     padding: 10,
     paddingVertical: 15,
-    backgroundColor: '#F1F4FF',
+    backgroundColor: "#F1F4FF",
     marginBottom: 10,
     borderRadius: 10,
-    color: '#626262',
-    borderWidth: 1, 
-    borderColor: '#cccccc', 
+    color: "#626262",
+    borderWidth: 1,
+    borderColor: "#cccccc",
   },
   inputFocused: {
-    borderWidth: 2, 
-    borderColor: '#1F1E53', 
+    borderWidth: 2,
+    borderColor: "#1F1E53",
   },
   btn: {
-    backgroundColor: '#1F1E53',
+    backgroundColor: "#1F1E53",
     borderRadius: 10,
     paddingVertical: 12,
     paddingHorizontal: 100,
@@ -107,34 +132,34 @@ const styles = StyleSheet.create({
   },
   btnText: {
     fontSize: 15,
-    color: '#ffffff',
+    color: "#ffffff",
   },
   fpw: {
-    alignSelf: 'flex-end',
-    marginRight: '10%',
+    alignSelf: "flex-end",
+    marginRight: "10%",
     marginTop: 5,
   },
   fpwbtn: {
-    color: '#1F41BB',
+    color: "#1F41BB",
   },
   cnaText: {
-    color: '#494949',
+    color: "#494949",
     marginTop: 5,
   },
   cnabtn: {
-    color: '#494949',
+    color: "#494949",
     marginTop: 5,
   },
   orwText: {
-    color: '#1F41BB',
+    color: "#1F41BB",
     marginTop: 50,
   },
   iconContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginTop: 10,
   },
   iconWrapper: {
-    backgroundColor: '#ECECEC',
+    backgroundColor: "#ECECEC",
     padding: 10,
     paddingHorizontal: 20,
     borderRadius: 10,
