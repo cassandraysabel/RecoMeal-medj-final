@@ -26,10 +26,17 @@
     },
     "web": {
       "favicon": "./assets/favicon.png",
-      "bundler": "metro"
+      "bundler": "metro",
+      "output": "server"
     },
     "plugins": [
-      "expo-router"
+      [
+        "expo-router",
+      {
+        "origin": "http://192.168.68.112:8081"
+      }
+      ]
+      
     ]
   }
 }
