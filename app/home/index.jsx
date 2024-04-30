@@ -126,11 +126,6 @@ export default function HomePage() {
         >
         Choose your Recipe
         </Text>
-      <View>
-        
-<Image source={assets.homeicon} />
-
-      </View>
       <RecipeList recipes={createdRecipes} />
 
       {/* Tags */}

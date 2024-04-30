@@ -10,7 +10,7 @@ export default function RecipeCard({ recipe }) {
   }
 
   return (
-    <View style={{ height: 234 }}>
+    <View style={{ height: 200 }}>
       <View
         style={{
           justifyContent: "flex-start",
@@ -50,7 +50,6 @@ export default function RecipeCard({ recipe }) {
             {recipe.recipe.label.toUpperCase()}
           </Text>
         </View>
-
         <View
           style={{ flex: 1, justifyContent: "flex-end", paddingBottom: 10 }}
         >

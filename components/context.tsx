@@ -4,7 +4,7 @@ import { Text } from "react-native";
 interface iUserData {
   isPremium: boolean;
   setIsPremium: (value: boolean) => void;
-  ingredients: any[];
+  ingredients: ingredient[];
   setIngredients: (value: any[]) => void;
   favoriteRecipes: any[];
   setFavoriteRecipes: (value: any[]) => void;
@@ -13,6 +13,13 @@ interface iUserData {
   recommendedFavorites: any[];
   setRecommendedFavorites: (value: any[]) => void;
 }
+
+interface ingredient {
+  name: string;
+  image: any;
+  expirationDate: string;
+  daysUntilExpiration: number;
+};
 
 export const UserDataContext = createContext<iUserData>({
   isPremium: false,
@@ -37,7 +44,7 @@ export const useDataContext = () => {
 
 const RecipeProvider = ({ children }) => {
   const [isPremium, setIsPremium] = useState(false);
-  const [ingredients, setIngredients] = useState([]);
+  const [ingredients, setIngredients] = useState<ingredient[]>([]);
   const [createdRecipes, setCreatedRecipes] = useState([]);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [recommendedFavorites, setRecommendedFavorites] = useState([]);

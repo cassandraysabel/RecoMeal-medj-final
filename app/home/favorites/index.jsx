@@ -1,27 +1,21 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import { Link } from "expo-router";
+import { assets } from '../../../components/assets';
 
 export default function FavoritesScreen() {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={require("../../../assets/favorites-bg.png")}
-        style={[styles.bgimage, { zIndex: 0 }]}
-        resizeMode="cover"
-      />
-      <View style={styles.overlay}>
+      <View style={styles.header}>
+        <Image source={assets.gradient} style={{ zIndex: 1 }} />
         <Image
-          source={require("../../../assets/gradient.png")}
-          style={[styles.gradientimage, { zIndex: 1 }]}
+          source={assets["ingredients-bg"]}
+          resizeMode="cover"
+          style={styles.bgimage}
         />
-        <Text style={[(styles.favText), { zIndex: 2 }]}>Favorites</Text>
+        <Text style={styles.ingredientsText}>Favorites</Text>
       </View>
-
-
-
-
-
     </View>
   );
 }
@@ -30,15 +24,25 @@ export default function FavoritesScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    position: 'relative',
+    width: '100%'
+    },
+  header: {
+    width: "100%",
+    position: "relative",
   },
   bgimage: {
     position: 'absolute',
-    top:0,
     left:0,
-    right: 0,
-    width: '100%',
-    height: '12%',
+    bottom: 0,
+    width: 300,
+    height: 200,
+  },
+  ingredientsText: {
+    color: "#333A73",
+    fontSize: 30,
+    fontWeight: "bold",
+    position: "absolute",
+    right: 10,
   },
   overlay:{
     position: 'absolute',

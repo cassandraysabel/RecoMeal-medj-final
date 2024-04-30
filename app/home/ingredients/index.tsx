@@ -1,6 +1,7 @@
 import {
   Image,
   Modal,
+  Pressable,
   ScrollView,
   StyleSheet,
   Text,
@@ -10,10 +11,10 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { assets } from "../../../components/assets";
-import Swipeout from "react-native-swipeout";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
 import { useDataContext } from "../../../components/context";
+import { Swipeable } from "react-native-gesture-handler";
 
 export default function Ingredients() {
   const [isInputScreenVisible, setIsInputScreenVisible] = useState(false);
@@ -183,12 +184,14 @@ export default function Ingredients() {
       <View style={styles.content}>
         <ScrollView style={styles.scrollContainer}>
           {ingredients.map((text, index) => (
-            <Swipeout
+            <Swipeable
               key={index}
-              right={[
-                {
-                  component: (
-                    <View
+              friction={2}
+              rightThreshold={70}
+              renderRightActions={() => (
+                <Pressable onPress={() => {
+                  handleDelete(index);
+                }}
                       style={{
                         width: 70,
                         height: 69,
@@ -198,14 +201,8 @@ export default function Ingredients() {
                       }}
                     >
                       <Text style={{ color: "white" }}>Delete</Text>
-                    </View>
-                  ),
-                  onPress: () => handleDelete(index),
-                  backgroundColor: "transparent",
-                },
-              ]}
-              autoClose={true}
-              backgroundColor="transparent"
+                    </Pressable>
+              )}
             >
               <View key={index} style={styles.rectangle}>
                 <View style={styles.displayItem}>
@@ -220,7 +217,8 @@ export default function Ingredients() {
                   </View>
                 </View>
               </View>
-            </Swipeout>
+            </Swipeable>
+            
           ))}
           <TouchableOpacity
             style={styles.searchbar}

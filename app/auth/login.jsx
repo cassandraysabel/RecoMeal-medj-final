@@ -40,7 +40,7 @@ export default function Login() {
         </View>
       </TouchableOpacity>
 
-      <View style={styles.signUpContainer}>
+      <View>
         <Link style={styles.cna} href={"/auth/signup"}>
           <Text style={styles.cnabtn}>Don't have an account yet? Sign Up</Text>
         </Link>
