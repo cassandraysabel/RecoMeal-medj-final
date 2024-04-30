@@ -1,4 +1,4 @@
-ALTER TABLE users MODIFY COLUMN id INT NOT NULL;
-
 SELECT * FROM users; 
+
+-- @block
 
