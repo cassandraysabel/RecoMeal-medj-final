@@ -1,26 +1,100 @@
-import { Pressable, StyleSheet, Text, View, Image } from 'react-native'
-import React from 'react'
-import { Link } from 'expo-router'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { Pressable, StyleSheet, Text, View, Image } from 'react-native';
+import React from 'react';
+import { Link } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Profile() {
   return (
-    <View>
-      <Link href={"auth/login"} >
-        <Text style={styles.logouttxt}>Log out</Text>
-      </Link>
+    <SafeAreaView style={styles.container}>
+      {/* Account Information Section */}
+      <View style={styles.accountInfoContainer}>
+        <Text style={styles.title}>Account Information</Text>
 
-      {/* <View style={styles.imageContainer}>
-      <Image source={require("../../../assets/abt-bg.png")} style={styles.abtimg}/>
-      </View> */}
-      
-    </View>
-  )
+        <View style={styles.infoRow}>
+          <Text style={styles.infoLabel}>E-Mail</Text>
+          <Text style={styles.infoValue}>cassandraysabel@gmail.com</Text>
+        </View>
+
+        <View style={styles.infoRow}>
+          <Text style={styles.infoLabel}>Subscription</Text>
+          <Text style={styles.infoValue}>Standard Plan</Text>
+        </View>
+      </View>
+
+      {/* Upgrade Button */}
+      <Pressable style={styles.upgradeButton}>
+        <Text style={styles.upgradeButtonText}>Subscribe to Premium</Text>
+      </Pressable>
+
+      {/* Notifications Section */}
+      <View style={styles.notificationContainer}>
+        <Text style={styles.title}>Notifications</Text>
+
+        <View style={styles.infoRow}>
+          <Text style={styles.infoLabel}>Push Notification</Text>
+          <Text style={styles.infoSwitchText}>ON</Text>  {/* Assuming a switch UI for toggling */}
+        </View>
+      </View>
+
+      {/* Logout Button */}
+      <View style={styles.logoutContainer}>
+        <Link href={"auth/login"}>
+          <Text style={styles.logoutText}>Log Out</Text>
+        </Link>
+      </View>
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
-  imageContainer:{
-    height: "100%",
-    width: "100%",
-  }
-})
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    paddingHorizontal: 20,
+  },
+  accountInfoContainer: {
+    marginTop: 20,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  infoRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 5,
+  },
+  infoLabel: {
+    fontSize: 16,
+    color: '#888',
+  },
+  infoValue: {
+    fontSize: 16,
+  },
+  upgradeButton: {
+    marginTop: 30,
+    padding: 15,
+    backgroundColor: '#eee',
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  upgradeButtonText: {
+    fontSize: 16,
+  },
+  notificationContainer: {
+    marginTop: 30,
+  },
+  logoutContainer: {
+    position: 'absolute',
+    bottom: 20,
+    alignItems: 'center',
+  },
+  logoutText: {
+    fontSize: 16,
+    color: '#c00',
+  },
+  infoSwitchText: { // Assuming a switch UI for toggling notifications
+    fontSize: 16,
+  },
+});

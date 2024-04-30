@@ -31,7 +31,7 @@ export default function SignUp() {
     }
 
     await axios
-      .post("http://192.168.254.112:8081/api/signup", {
+      .post("/api/signup", {
         name,
         email: email,
         password,

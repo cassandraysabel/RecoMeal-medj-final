@@ -18,14 +18,14 @@ export default function Login() {
 
   const logIn = async () => {
     try {
-      await axios.post('http://192.168.254.112:8081/api/login', {
+      await axios.post('http://192.168.254.108:8081/api/login', {
         email: email,
         password: password
       }).then((res) => {
         console.log(res);
         router.replace("/home");
       }).catch((err: AxiosError) => {
-        console.log(err.response?.data as string);
+        console.log(err.message);
       })
     } catch (e) {
 
