@@ -7,20 +7,18 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 export default function Layout() {
   return (
     <GestureHandlerRootView>
-    <RecipeProvider>
-      <SafeAreaView style={styles.container}>
-        <Slot />
-      </SafeAreaView>
-    </RecipeProvider>
+      <RecipeProvider>
+        <SafeAreaView style={styles.container}>
+          <Slot />
+        </SafeAreaView>
+      </RecipeProvider>
     </GestureHandlerRootView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
     height: "100%",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
+    width: "100%",
   },
 });

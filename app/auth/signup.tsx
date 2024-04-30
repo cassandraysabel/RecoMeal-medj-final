@@ -19,6 +19,7 @@ export default function SignUp() {
   const [error, setError] = useState("");
 
   const createAccount = async () => {
+    console.log(name, email, password, confirmPassword);
     // validate email
     if (email.split("@").length !== 2) {
       alert("Invalid email address");
@@ -28,26 +29,17 @@ export default function SignUp() {
       alert("Invalid email address");
       return;
     }
-    // validate password
 
     await axios
-      .post(
-        "/api/signup",
-        {
-          name,
-          email: email,
-          password,
-          confirmPassword,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
+      .post("http://192.168.254.112:8081/api/signup", {
+        name,
+        email: email,
+        password,
+        confirmPassword,
+      })
       .then((res) => {
         console.log(res.data);
-        setError("You have created an account!")
+        setError("You have created an account!");
       })
       .catch((err: AxiosError) => {
         setError(err.response?.data as string);
@@ -119,7 +111,13 @@ export default function SignUp() {
         </TouchableOpacity>
       </View>
       <View>
-        <Text>{error}</Text>
+        <Text
+          style={{
+            color: "red",
+          }}
+        >
+          {error}
+        </Text>
       </View>
     </View>
   );

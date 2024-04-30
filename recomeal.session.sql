@@ -1,6 +1,7 @@
-ALTER TABLE users MODIFY COLUMN id INT NOT NULL;
-
 SELECT * FROM users; 
+
+-- @block
+DELETE FROM users WHERE id = 7;
 
 -- @block
 

@@ -1,21 +1,12 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { Slot, Stack,  } from "expo-router";
+import { Slot, } from "expo-router";
 import Footer from "../../components/Footer";
 
 export default function Layout() {
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "flex-start",
-          alignItems: "center",
-          width: "100%",
-        }}
-      >
-        <Slot />
-      </View>
+      <Slot />
       <Footer />
     </View>
   );

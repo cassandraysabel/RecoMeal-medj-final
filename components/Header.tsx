@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { assets } from './assets'
 
 export default function Header() {
     
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   bgimage: {
-    position: "absolute";
+    position: "absolute",
     left: number;
     bottom: number;
     width: number;
