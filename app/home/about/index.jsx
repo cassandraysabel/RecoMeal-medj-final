@@ -47,7 +47,11 @@ const About = () => {
 
   return (
     <View>
+
+    <View style={styles.imageContainer}>
     <Image source={require("../../../assets/abt-bg.png")} style={styles.abtimg}/>
+    </View>
+    
     <KeyboardAvoidingView style={styles.container} behavior="height">
       <Text style={styles.about}>MEET THE TEAM</Text>
       <View style={styles.developersContainer}>
@@ -96,7 +100,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 20,
+    width: "100%",
+    height: "100%"
   },
   about: {
     fontSize: 23,
@@ -106,19 +111,24 @@ const styles = StyleSheet.create({
     marginTop: 23,
   },
   abtimg:{
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
     position: 'absolute',
-    top: 0,
-    left: 0,
 
+  },
+  imageContainer: {
+    flex: 1,
+    position: 'absolute',
+    width: "100%",
+    height: "100%",
+    resizeMode:'cover'
   },
   feedback: {
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
-    marginTop: 23, // Adjusted top margin
+    marginTop: 23
   },
   developersContainer: {
     marginBottom: 20,
