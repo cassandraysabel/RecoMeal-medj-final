@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Link } from "expo-router";
 
 const SplashScreen = () => {
   const navigation = useNavigation();
@@ -11,9 +10,9 @@ const SplashScreen = () => {
   useEffect(() => {
     if (middleGifVisible) {
       const timer = setTimeout(() => {
-        // After 5 seconds, navigate to the next page
-        <Link href={"/auth/login.tsx"}/>
-      }, 2000);
+        // After 3 seconds, navigate to the next page
+        navigation.navigate('auth/login.tsx');
+      }, 3000);
 
       return () => clearTimeout(timer);
     }
