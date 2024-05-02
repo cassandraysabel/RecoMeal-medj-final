@@ -9,7 +9,6 @@ const SplashScreen = () => {
     if (middleGifVisible) {
       const timer = setTimeout(() => {
         // After 3 seconds, navigate to the next page
-        console.log("HDHSHDGAKSHDa")
         router.replace('auth/login');
       }, 3000);
 

@@ -6,7 +6,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 export default function Profile() {
   return (
     <SafeAreaView style={styles.container}>
-      {/* Account Information Section */}
       <View style={styles.accountInfoContainer}>
         <Text style={styles.title}>Account Information</Text>
 
@@ -32,7 +31,7 @@ export default function Profile() {
 
         <View style={styles.infoRow}>
           <Text style={styles.infoLabel}>Push Notification</Text>
-          <Text style={styles.infoSwitchText}>ON</Text>  {/* Assuming a switch UI for toggling */}
+          <Text style={styles.infoSwitchText}>ON</Text>
         </View>
       </View>
 

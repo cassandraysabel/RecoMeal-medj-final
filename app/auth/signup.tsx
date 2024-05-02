@@ -9,13 +9,13 @@ import {
   Pressable,
 } from "react-native";
 import { Link, router } from "expo-router";
+import { createUser } from "../../utils/firebase";
 
 export default function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
 
   const createAccount = async () => {
     try {
@@ -40,8 +40,7 @@ export default function SignUp() {
         return;
       }
 
-      // await createUser(email, password);
-
+      await createUser(name, email, password);
     } catch (err) {
       console.log(err);
     }
@@ -110,15 +109,6 @@ export default function SignUp() {
             source={require("../../assets/apple-logo.png")}
           />
         </TouchableOpacity>
-      </View>
-      <View>
-        <Text
-          style={{
-            color: "red",
-          }}
-        >
-          {error}
-        </Text>
       </View>
     </View>
   );

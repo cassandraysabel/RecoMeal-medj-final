@@ -8,6 +8,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { Link, router } from "expo-router";
+import { signIn } from "../../utils/firebase";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -18,12 +19,13 @@ export default function Login() {
   const logIn = async () => {
     try {
       if (!email || !password) {
-       alert( "Please fill all the fields")
+        alert("Please fill all the fields");
       }
-
-      // await signIn(email, password);
-    } catch (e) {
-
+      await signIn(email, password);
+      console.log("Logged in");
+      router.replace("/home");
+    } catch (err) {
+      console.log(err);
     }
   };
   return (
@@ -48,7 +50,10 @@ export default function Login() {
         onBlur={() => setPasswordFocused(false)}
       />
 
-      <TouchableOpacity style={styles.fpw} onPress={() => router.replace('/auth/fpw')}>
+      <TouchableOpacity
+        style={styles.fpw}
+        onPress={() => router.replace("/auth/fpw")}
+      >
         <Text style={styles.fpwbtn}>Forgot your password?</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={logIn}>
