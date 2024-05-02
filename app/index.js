@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { View, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+
+
+
 const SplashScreen = () => {
   const navigation = useNavigation();
   const [gifVisible, setGifVisible] = useState(false);
@@ -11,8 +14,8 @@ const SplashScreen = () => {
     if (middleGifVisible) {
       const timer = setTimeout(() => {
         // After 3 seconds, navigate to the next page
-        navigation.navigate('auth/login.tsx');
-      }, 3000);
+        navigation.navigate('auth/login');
+      }, 2000);
 
       return () => clearTimeout(timer);
     }
