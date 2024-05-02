@@ -82,11 +82,7 @@ export default function HomePage() {
             >
               WELCOME!
             </Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Input your ingredients"
-              placeholderTextColor={"#333A73"}
-            />
+            
           </View>
 
           <Image

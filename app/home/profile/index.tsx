@@ -2,6 +2,7 @@ import { Pressable, StyleSheet, Text, View, Image } from 'react-native';
 import React from 'react';
 import { Link } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { auth } from '../../../utils/firebase';
 
 export default function Profile() {
   return (
@@ -10,8 +11,13 @@ export default function Profile() {
         <Text style={styles.title}>Account Information</Text>
 
         <View style={styles.infoRow}>
+          <Text style={styles.infoLabel}>Name</Text>
+          <Text style={styles.infoValue}>{auth.currentUser.displayName}</Text>
+        </View>
+
+        <View style={styles.infoRow}>
           <Text style={styles.infoLabel}>E-Mail</Text>
-          <Text style={styles.infoValue}>cassandraysabel@gmail.com</Text>
+          <Text style={styles.infoValue}>{auth.currentUser.email}</Text>
         </View>
 
         <View style={styles.infoRow}>
@@ -85,9 +91,6 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   logoutContainer: {
-    position: 'absolute',
-    bottom: 20,
-    alignItems: 'center',
   },
   logoutText: {
     fontSize: 16,
