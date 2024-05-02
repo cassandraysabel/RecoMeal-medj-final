@@ -3,8 +3,12 @@ import React from 'react';
 import { Link } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { auth } from '../../../utils/firebase';
+import { useUserAuth } from '../../../utils/Auth';
 
 export default function Profile() {
+
+  const { user } = useUserAuth();
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.accountInfoContainer}>
@@ -12,12 +16,12 @@ export default function Profile() {
 
         <View style={styles.infoRow}>
           <Text style={styles.infoLabel}>Name</Text>
-          <Text style={styles.infoValue}>{auth.currentUser.displayName}</Text>
+          <Text style={styles.infoValue}>{user.displayName}</Text>
         </View>
 
         <View style={styles.infoRow}>
           <Text style={styles.infoLabel}>E-Mail</Text>
-          <Text style={styles.infoValue}>{auth.currentUser.email}</Text>
+          <Text style={styles.infoValue}>{user.email}</Text>
         </View>
 
         <View style={styles.infoRow}>
