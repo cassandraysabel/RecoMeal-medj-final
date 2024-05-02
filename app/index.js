@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { View, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { router } from 'expo-router';
 
 const SplashScreen = () => {
-  const navigation = useNavigation();
   const [gifVisible, setGifVisible] = useState(false);
   const [middleGifVisible, setMiddleGifVisible] = useState(false);
-
   useEffect(() => {
     if (middleGifVisible) {
       const timer = setTimeout(() => {
         // After 3 seconds, navigate to the next page
-        navigation.navigate('auth/login.tsx');
+        console.log("HDHSHDGAKSHDa")
+        router.replace('auth/login');
       }, 3000);
 
       return () => clearTimeout(timer);
     }
-  }, [middleGifVisible, navigation]);
+  }, [middleGifVisible]);
 
   const handlePress = () => {
     // Show the GIF when user clicks anywhere on the screen
