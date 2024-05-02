@@ -8,22 +8,12 @@ import {
   Image,
   Alert,
 } from "react-native";
-import axios, { AxiosError } from "axios";
 import { router } from "expo-router";
 
 const sendVerificationCode = async (email) => {
 
   const verificationCode = generateVerificationCode();
 
-  await axios
-    .post("/api/fpw", { email, verificationCode })
-    .then((res) => {
-      console.log(res.data);
-      console.log("Verification code sent to", email, ":", verificationCode);
-    })
-    .catch((err: AxiosError) => {
-      console.error(err);
-    });
 
   return verificationCode;
 };

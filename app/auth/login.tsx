@@ -8,7 +8,6 @@ import {
   StyleSheet,
 } from "react-native";
 import { Link, router } from "expo-router";
-import axios, { AxiosError } from "axios";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -18,15 +17,11 @@ export default function Login() {
 
   const logIn = async () => {
     try {
-      await axios.post('http://192.168.254.108:8081/api/login', {
-        email: email,
-        password: password
-      }).then((res) => {
-        console.log(res);
-        router.replace("/home");
-      }).catch((err: AxiosError) => {
-        console.log(err.message);
-      })
+      if (!email || !password) {
+       alert( "Please fill all the fields")
+      }
+
+      // await signIn(email, password);
     } catch (e) {
 
     }

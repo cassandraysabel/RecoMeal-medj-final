@@ -1,17 +1,20 @@
 import { StyleSheet, SafeAreaView, Text } from "react-native";
 import React from "react";
 import { Slot } from "expo-router";
-import RecipeProvider from "../components/context";
+import RecipeProvider from "../utils/UserData";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+// import AuthProvider from "../utils/Auth";
 
 export default function Layout() {
   return (
     <GestureHandlerRootView>
-      <RecipeProvider>
-        <SafeAreaView style={styles.container}>
-          <Slot />
-        </SafeAreaView>
-      </RecipeProvider>
+      {/* <AuthProvider> */}
+        <RecipeProvider>
+          <SafeAreaView style={styles.container}>
+            <Slot />
+          </SafeAreaView>
+        </RecipeProvider>
+      {/* </AuthProvider> */}
     </GestureHandlerRootView>
   );
 }

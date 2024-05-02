@@ -20,7 +20,7 @@ import moment from "moment";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 // import { createStackNavigator } from "@react-navigation/stack";
 import Swipeout from "react-native-swipeout";
-import { useDataContext } from "../../../components/context";
+import { useDataContext } from "../../../utils/UserData";
 
 const ScreeWidth = Dimensions.get("window").width;
 

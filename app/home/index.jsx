@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { assets } from "../../components/assets";
 import RecipeList from "../../components/RecipeList";
-import { useDataContext } from "../../components/context";
+import { useDataContext } from "../../utils/UserData";
 import { Link } from "expo-router";
 
 const ScreenWidth = Dimensions.get("window").width;

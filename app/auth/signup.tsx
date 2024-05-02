@@ -9,7 +9,6 @@ import {
   Pressable,
 } from "react-native";
 import { Link, router } from "expo-router";
-import axios, { AxiosError } from "axios";
 
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -19,31 +18,33 @@ export default function SignUp() {
   const [error, setError] = useState("");
 
   const createAccount = async () => {
-    console.log(name, email, password, confirmPassword);
-    // validate email
-    if (email.split("@").length !== 2) {
-      alert("Invalid email address");
-      return;
-    }
-    if (email.split("@")[1].split(".").length < 2) {
-      alert("Invalid email address");
-      return;
-    }
+    try {
+      console.log(name, email, password, confirmPassword);
+      // validate email
+      if (email.split("@").length !== 2) {
+        alert("Invalid email address");
+        return;
+      }
+      if (email.split("@")[1].split(".").length < 2) {
+        alert("Invalid email address");
+        return;
+      }
+      // validate password
+      if (password.length < 8) {
+        alert("Password must be at least 6 characters");
+        return;
+      }
 
-    await axios
-      .post("/api/signup", {
-        name,
-        email: email,
-        password,
-        confirmPassword,
-      })
-      .then((res) => {
-        console.log(res.data);
-        setError("You have created an account!");
-      })
-      .catch((err: AxiosError) => {
-        setError(err.response?.data as string);
-      });
+      if (password !== confirmPassword) {
+        alert("Passwords do not match");
+        return;
+      }
+
+      // await createUser(email, password);
+
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

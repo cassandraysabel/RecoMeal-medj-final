@@ -13,7 +13,7 @@ import React, { useState } from "react";
 import { assets } from "../../../components/assets";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
-import { useDataContext } from "../../../components/context";
+import { useDataContext } from "../../../utils/UserData";
 import { Swipeable } from "react-native-gesture-handler";
 
 export default function Ingredients() {
