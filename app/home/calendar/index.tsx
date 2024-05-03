@@ -7,7 +7,7 @@ import {
   View,
   ViewBase,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { assets } from "../../../components/assets";
@@ -17,31 +17,26 @@ import { Calendar } from "react-native-calendars";
 import { MarkedDates } from "react-native-calendars/src/types";
 import CalendarModal from "../../../components/CalendarModal";
 
-
-
-
 const ScreenWidth = Dimensions.get("window").width;
 
-
 export default function CalendarPage() {
-  const { ingredients } = useDataContext();
+  const { createdIngredients } = useDataContext();
 
   const [selectedDate, setSelectedDate] = useState("");
   const [markedDates, setMarkedDates] = useState<MarkedDates>({});
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedDateIngredients, setselectedDateIngredients] = useState([])
+  const [selectedDateIngredients, setselectedDateIngredients] = useState([]);
 
-  
   useEffect(() => {
     const updatedMarkedDates = {};
-    ingredients.forEach(ingredient => {
+    createdIngredients.forEach((ingredient) => {
       updatedMarkedDates[ingredient.expirationDate] = {
         marked: true,
         selectedColor: "blue",
       };
     });
     setMarkedDates(updatedMarkedDates);
-  }, [ingredients]);
+  }, [createdIngredients]);
 
   const handleDayPress = (day) => {
     const selectedDate = day.dateString;
@@ -50,52 +45,96 @@ export default function CalendarPage() {
     setSelectedDate(formattedDate);
 
     if (markedDates[selectedDate]) {
-      const ingredientsForSelectedDate = ingredients.filter(
-        (ingredient) => ingredient.expirationDate === selectedDate);
-        setselectedDateIngredients(ingredientsForSelectedDate)
-        setModalVisible(true);
-
+      const ingredientsForSelectedDate = createdIngredients.filter(
+        (ingredient) => ingredient.expirationDate === selectedDate
+      );
+      setselectedDateIngredients(ingredientsForSelectedDate);
+      setModalVisible(true);
     } else {
-      setselectedDateIngredients([])
-      setModalVisible(false)
+      setselectedDateIngredients([]);
+      setModalVisible(false);
     }
   };
 
   const renderModalContent = (formattedDate) => (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <View style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', paddingLeft:15, paddingTop:5, borderRadius: 15, borderColor:'black', borderWidth: 1, width:275}}>
-        <Text style={{color:'black', fontSize:16, marginBottom:10, fontWeight:'bold'}}>{formattedDate}</Text>
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View
+        style={{
+          backgroundColor: "rgba(255, 255, 255, 0.9)",
+          paddingLeft: 15,
+          paddingTop: 5,
+          borderRadius: 15,
+          borderColor: "black",
+          borderWidth: 1,
+          width: 275,
+        }}
+      >
+        <Text
+          style={{
+            color: "black",
+            fontSize: 16,
+            marginBottom: 10,
+            fontWeight: "bold",
+          }}
+        >
+          {formattedDate}
+        </Text>
         {selectedDateIngredients.map((ingredient, index) => (
-          <View key={index} style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5 }}>
-            <Image source={{ uri: ingredient.image }} style={{ width: 49, height: 45, marginRight: 10, borderRadius:30 }} />
-            <Text style={{fontSize:16, fontWeight:'bold', textTransform:'uppercase'}}>{ingredient.name}</Text>
+          <View
+            key={index}
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginBottom: 5,
+            }}
+          >
+            <Image
+              source={{ uri: ingredient.image }}
+              style={{
+                width: 49,
+                height: 45,
+                marginRight: 10,
+                borderRadius: 30,
+              }}
+            />
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "bold",
+                textTransform: "uppercase",
+              }}
+            >
+              {ingredient.name}
+            </Text>
           </View>
         ))}
 
-        <TouchableOpacity style={{ marginTop: 15 , paddingBottom:5,paddingRight:15, alignItems:'flex-end'}} onPress={() => setModalVisible(false)}>
-          <Text style={{fontWeight:'bold'}}>CLOSE</Text>
+        <TouchableOpacity
+          style={{
+            marginTop: 15,
+            paddingBottom: 5,
+            paddingRight: 15,
+            alignItems: "flex-end",
+          }}
+          onPress={() => setModalVisible(false)}
+        >
+          <Text style={{ fontWeight: "bold" }}>CLOSE</Text>
         </TouchableOpacity>
-
       </View>
     </View>
-
-      );
-
-  
-
+  );
 
   return (
     <View style={styles.container}>
-
       <View style={styles.overlay}>
-      <Image source={assets["ingredients-bg"]} style={styles.bgimage} />
+        <Image source={assets["ingredients-bg"]} style={styles.bgimage} />
         <Image
           source={assets.gradient}
           style={[styles.gradientimage, { zIndex: 1 }]}
         />
         <Text style={[styles.ingredientsText, { zIndex: 2 }]}>Calendar</Text>
       </View>
-      <View style={{ flex: 1, top: 100}}>
+      <View style={{ flex: 1, top: 100 }}>
         <Calendar
           markedDates={markedDates}
           onDayPress={handleDayPress}
@@ -105,38 +144,30 @@ export default function CalendarPage() {
           animationType="slide"
           transparent={true}
           visible={modalVisible}
-          onRequestClose={() =>
-            setModalVisible(false)
-          }
+          onRequestClose={() => setModalVisible(false)}
         >
           {renderModalContent(selectedDate)}
 
-
           {/* <CalendarModal selectedDate={setSelectedDate} /> */}
-
-          
         </Modal>
       </View>
-      <View style={styles.content}>     
-            
-                <ScrollView style={styles.scrollContainer}>
-                    {ingredients.map((text, index) => (
-                    
-                        <View key={index} style={styles.rectangle}>
-                            <View style={styles.displayItem}>
-                                <Image source={{ uri: text.image }} style={styles.image} />
-                                <View style={styles.textposition}>
-                                    <Text style={styles.displayText}>{text.name}</Text>
-                                    {/* {daysUntilExpiration !== '' && (
+      <View style={styles.content}>
+        <ScrollView style={styles.scrollContainer}>
+          {createdIngredients.map((text, index) => (
+            <View key={index} style={styles.rectangle}>
+              <View style={styles.displayItem}>
+                <Image source={{ uri: text.image }} style={styles.image} />
+                <View style={styles.textposition}>
+                  <Text style={styles.displayText}>{text.name}</Text>
+                  {/* {daysUntilExpiration !== '' && (
                                         <Text style={styles.resultText}>Will expire on: {text.daysUntilExpiration} days</Text>
                                     )} */}
-                                </View>
-                            </View>
-                            
-                        </View>
-                    ))}
-                </ScrollView>
-        </View>
+                </View>
+              </View>
+            </View>
+          ))}
+        </ScrollView>
+      </View>
     </View>
   );
 }
