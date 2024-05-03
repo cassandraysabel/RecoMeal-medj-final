@@ -2,13 +2,13 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Slot, } from "expo-router";
 import Footer from "../../components/Footer";
-
+import { SafeAreaView } from "react-native-safe-area-context";
 export default function Layout() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Slot />
       <Footer />
-    </View>
+    </SafeAreaView>
   );
 }
 

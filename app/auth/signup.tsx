@@ -8,7 +8,7 @@ import {
   Image,
   Pressable,
 } from "react-native";
-import { Link, router } from "expo-router";
+import { Link, useRouter } from "expo-router"; // corrected import
 import { createUser } from "../../utils/firebase";
 
 export default function SignUp() {
@@ -16,6 +16,7 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const router = useRouter(); // corrected initialization
 
   const createAccount = async () => {
     try {
@@ -31,7 +32,7 @@ export default function SignUp() {
       }
       // validate password
       if (password.length < 8) {
-        alert("Password must be at least 6 characters");
+        alert("Password must be at least 8 characters"); // corrected validation message
         return;
       }
 
@@ -41,6 +42,15 @@ export default function SignUp() {
       }
 
       await createUser(name, email, password);
+
+      setName("")
+      setEmail("")
+      setPassword("")
+      setConfirmPassword("")
+
+      alert("Account has been made. Please log in.")
+
+      router.replace("auth/login")
     } catch (err) {
       console.log(err);
     }
@@ -80,18 +90,35 @@ export default function SignUp() {
       />
       <Pressable onPress={createAccount}>
         <View style={styles.btn}>
-          <Text style={styles.btnText}>Sign Up</Text>
+          <Text
+            style={{
+              color: "white",
+            }}
+          >
+            Sign Up
+          </Text>
         </View>
       </Pressable>
-      <Text>
-        If you have an account already,
-        <Pressable onPress={() => router.replace("/auth/login")}>
-          <Text style={{ color: "blue", marginVertical: 10 }}>
-            {" "}
-            Log in Here
-          </Text>
-        </Pressable>
-      </Text>
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Text>If you have an account already, </Text>
+        <View style={styles.logInButton}>
+          <Link href={"/auth/login"}>
+            <Text
+              style={{
+                color: "white",
+              }}
+            >
+              Log In
+            </Text>
+          </Link>
+        </View>
+      </View>
+
       <Text>Or continue with</Text>
       <View style={styles.iconContainer}>
         <TouchableOpacity key="fb" style={styles.iconWrapper}>
@@ -118,7 +145,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    marginTop: 50,
+    marginTop: 20,
     width: "100%",
     height: "100%",
   },
@@ -156,9 +183,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 10,
   },
-  btnText: {
-    fontSize: 15,
-    color: "#ffffff",
+  logInButton: {
+    backgroundColor: "#1F1E53",
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    marginVertical: 10,
+    height: 30,
+    width: 100,
+    alignSelf: "center",
+  },
+  logInText: {
+    fontSize: 18,
+    color: "blue",
+    textDecorationLine: "underline",
   },
   iconContainer: {
     flexDirection: "row",

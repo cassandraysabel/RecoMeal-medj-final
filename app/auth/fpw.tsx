@@ -9,20 +9,10 @@ import {
   Alert,
 } from "react-native";
 import { router } from "expo-router";
-
-const sendVerificationCode = async (email) => {
-
-  const verificationCode = generateVerificationCode();
-
-
-  return verificationCode;
-};
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../../utils/firebase";
 
 // Mock function for generating a random verification code
-const generateVerificationCode = () => {
-  return Math.floor(100000 + Math.random() * 900000); // Generate a 6-digit random number
-};
-
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
@@ -36,9 +26,11 @@ export default function ForgotPassword() {
     }
 
     try {
-      const code = await sendVerificationCode(email);
-      setVerificationCode(code.toString());
+      await sendPasswordResetEmail(auth, email).then(() => {
+        console.log("HELLO ASHDJAHSKDHAKHDALJSLDASLD");
+      });
       setIsCodeSent(true);
+
       Alert.alert(
         "Code Sent",
         "A verification code has been sent to your email."
@@ -65,7 +57,7 @@ export default function ForgotPassword() {
   };
 
   const navigateToSignUp = () => {
-    router.replace("SignUp"); // Navigate to SignUpScreen
+    router.replace("auth/signup"); // Navigate to SignUpScreen
   };
 
   return (
@@ -79,25 +71,10 @@ export default function ForgotPassword() {
         placeholder="Email"
         keyboardType="email-address"
       />
-      {!isCodeSent ? (
-        <TouchableOpacity style={styles.btn} onPress={handleForgotPassword}>
-          <Text style={styles.btnText}>Send Verification Code</Text>
-        </TouchableOpacity>
-      ) : (
-        <>
-          <TextInput
-            style={styles.input}
-            value={enteredCode}
-            onChangeText={setEnteredCode}
-            placeholder="Verification Code"
-            keyboardType="numeric"
-          />
-          <TouchableOpacity style={styles.btn} onPress={handleVerifyCode}>
-            <Text style={styles.btnText}>Verify Code</Text>
-          </TouchableOpacity>
-        </>
-      )}
-
+      
+      <TouchableOpacity style={styles.btn} onPress={handleForgotPassword}>
+        <Text style={styles.btnText}>Send Verification Code</Text>
+      </TouchableOpacity>
       <TouchableOpacity style={styles.link} onPress={navigateToSignUp}>
         <Text style={styles.linkText}>Create an account</Text>
       </TouchableOpacity>
