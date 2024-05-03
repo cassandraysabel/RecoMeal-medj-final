@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { assets } from "../../../components/assets";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
@@ -183,42 +183,40 @@ export default function Ingredients() {
       </View>
       <View style={styles.content}>
         <ScrollView style={styles.scrollContainer}>
-          {ingredients.map((text, index) => (
+          {ingredients.map(({ name, image, daysUntilExpiration }, index) => (
             <Swipeable
               key={index}
               friction={2}
               rightThreshold={70}
               renderRightActions={() => (
-                <Pressable onPress={() => {
-                  handleDelete(index);
-                }}
-                      style={{
-                        width: 70,
-                        height: 69,
-                        backgroundColor: "red",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Text style={{ color: "white" }}>Delete</Text>
-                    </Pressable>
+                <Pressable
+                  onPress={() => {
+                    handleDelete(index);
+                  }}
+                  style={{
+                    width: 70,
+                    height: 69,
+                    backgroundColor: "red",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text style={{ color: "white" }}>Delete</Text>
+                </Pressable>
               )}
             >
               <View key={index} style={styles.rectangle}>
                 <View style={styles.displayItem}>
-                  <Image source={{ uri: text.image }} style={styles.image} />
+                  <Image source={{ uri: image }} style={styles.image} />
                   <View style={styles.textposition}>
-                    <Text style={styles.displayText}>{text.name}</Text>
-                    {daysUntilExpiration !== "" && (
-                      <Text style={styles.resultText}>
-                        Will expire on: {text.daysUntilExpiration} days
-                      </Text>
-                    )}
+                    <Text style={styles.displayText}>{name}</Text>
+                    <Text style={styles.resultText}>
+                      Will expire on: {daysUntilExpiration} days
+                    </Text>
                   </View>
                 </View>
               </View>
             </Swipeable>
-            
           ))}
           <TouchableOpacity
             style={styles.searchbar}
@@ -263,29 +261,26 @@ export default function Ingredients() {
               width: 330,
               height: 300,
               backgroundColor: "#F2F2F2",
-              justifyContent: "center",
               alignItems: "center",
+              justifyContent: "center",
               borderRadius: 15,
             }}
           >
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <View>
               <Text
                 style={{
                   fontSize: 16,
                   color: "#333333",
                   fontWeight: "bold",
-                  marginBottom: 8,
-                  marginLeft: 30,
                 }}
               >
                 Ingredient
               </Text>
-              <View style={{ flex: 1 }}></View>
             </View>
             <TextInput
               style={{
-                height: 27,
                 width: 257,
+                height: 27,
                 backgroundColor: "#D9D9D9",
                 justifyContent: "center",
                 alignItems: "center",
@@ -299,19 +294,18 @@ export default function Ingredients() {
               value={text1}
             />
 
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <View>
               <Text
                 style={{
                   fontSize: 16,
                   color: "#333333",
                   fontWeight: "bold",
-                  marginBottom: 8,
-                  marginLeft: 30,
                 }}
               >
                 Date of Purchase
               </Text>
-              <View style={{ flex: 1 }}></View>
+
+              {/* <View style={{ flex: 1 }}></View> */}
             </View>
 
             <View
@@ -321,7 +315,6 @@ export default function Ingredients() {
                 backgroundColor: "#D9D9D9",
                 justifyContent: "center",
                 alignItems: "center",
-                marginBottom: 10,
                 borderRadius: 10,
                 paddingLeft: 5,
                 flexDirection: "row",
@@ -346,7 +339,7 @@ export default function Ingredients() {
                 mode="date"
                 onConfirm={handlePurchaseDateConfirm}
                 onCancel={togglePurhaseDate}
-              ></DateTimePickerModal>
+              />
             </View>
 
             <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -355,13 +348,12 @@ export default function Ingredients() {
                   fontSize: 16,
                   color: "#333333",
                   fontWeight: "bold",
-                  marginBottom: 8,
-                  marginLeft: 30,
+                  paddingTop: 10,
+                  alignItems: "center",
                 }}
               >
                 Expiration Date
               </Text>
-              <View style={{ flex: 1 }}></View>
             </View>
 
             <View
@@ -371,9 +363,7 @@ export default function Ingredients() {
                 backgroundColor: "#D9D9D9",
                 justifyContent: "center",
                 alignItems: "center",
-                marginBottom: 20,
                 borderRadius: 10,
-                paddingLeft: 5,
                 flexDirection: "row",
               }}
             >
@@ -400,12 +390,12 @@ export default function Ingredients() {
             </View>
 
             <TouchableOpacity
-              onPress={() => {
-                handlePress();
-              }}
-              style={styles.button}
+              onPress={
+                handlePress
+              }
+              style={[styles.button, { marginTop: 15, height: 30, justifyContent: 'center'}]}
             >
-              <Text style={styles.buttonText}>ADD</Text>
+              <Text style={[styles.buttonText, {}]}>ADD</Text>
             </TouchableOpacity>
           </View>
         </View>

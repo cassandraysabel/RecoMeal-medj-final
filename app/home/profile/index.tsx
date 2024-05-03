@@ -4,7 +4,6 @@ import { Link, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { auth } from "../../../utils/firebase";
 import { useAuth } from "../../../utils/Auth";
-//
 
 export default function Profile() {
   const { user, signOut } = useAuth();

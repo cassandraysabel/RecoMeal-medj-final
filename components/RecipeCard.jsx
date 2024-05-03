@@ -8,14 +8,6 @@ import FavoritesScreen from '../app/home/favorites';
 export default function RecipeCard({ recipe }) {
 
   const { favoriteRecipes, setFavoriteRecipes } = useDataContext()
-  // const { favorite, setFavorite} = useState(false)
-
-
-  // const toggle = () => {
-  //   favorite(!setFavorite);
-  // }
-
-  // const [favoriteRecipes, setfavoriteRecipes]= useState([]);
 
   const AddRecipesToFavorites = () => {
     //console.log("Adding recipe to favorites:", recipe); 
@@ -26,12 +18,11 @@ export default function RecipeCard({ recipe }) {
     }
 
     console.log(recipe)
-
     const updatedFavorites = [...favoriteRecipes, recipe];
     setFavoriteRecipes(updatedFavorites);
-    
     //console.log("Updated favorite recipes:", updatedFavorites); 
   }
+
 
   return (
     <View>
