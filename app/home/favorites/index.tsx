@@ -33,7 +33,7 @@ export default function FavoritesScreen() {
         data={favoriteRecipes}
         keyExtractor={(item) => item.id || Math.random().toString()} // Ensure unique key
         renderItem={({ item }) => (
-          <View style={styles.favorite_rectangle}>
+          <View>
             <View style={{ flexDirection: "row" }}>
               <View style={{ justifyContent: "flex-start", marginLeft: 5 }}>
                 <TouchableOpacity onPress={() => removeFromFavorites(item)}>
@@ -46,7 +46,6 @@ export default function FavoritesScreen() {
                 {item.recipe && (
                   <Image
                     source={{ uri: item.recipe.image }}
-                    style={styles.favorite_image}
                   />
                 )}
               </View>
