@@ -3,11 +3,11 @@ import React from 'react';
 import { Link } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { auth } from '../../../utils/firebase';
-import { useUserAuth } from '../../../utils/Auth';
+
 
 export default function Profile() {
 
-  const { user } = useUserAuth();
+  const { user } = useauth
 
   return (
     <SafeAreaView style={styles.container}>

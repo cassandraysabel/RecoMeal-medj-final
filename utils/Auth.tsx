@@ -6,61 +6,38 @@ import { getData, setData } from "./asyncstorage";
 // import { onAuthStateChanged, User } from 'firebase/auth'
 // import { auth } from './firebase'
 
-interface IAuthContext {
-  user: null | User;
-  setuser: (user: null | User) => void;
-  signIn: (email: any, password: any) => Promise<void>;
-  signOut: () => Promise<void>;
-}
+// interface IAuthContext {
+//   user: null | User
+//   setuser: (user: null | User) => void
+// }
 
-export const AuthContext = createContext<IAuthContext>({
-  user: null,
-  setuser: () => {},
-  signIn: async (email: any, password: any) => {},
-  signOut: async () => {}
-});
+// export const AuthContext = createContext<IAuthContext>({
+//   user: null,
+//   setuser: () => {}
+// })
+// export default function AuthProvider({ children }) {
 
-export const useUserAuth = () => useContext(AuthContext);
+//   const [user, setuser] = useState<null | User>(null)
 
-export default function AuthProvider({ children }) {
-  const [user, setuser] = useState<null | User>(null);
+//   useEffect(() => {
+//     const unsubscribe = onAuthStateChanged(auth, (newUser) => {
+//       if (newUser) {
+//         setuser(newUser)
+//       } else {
+//         setuser(null)
+//       }
+//     })
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (newUser) => {
-      if (newUser) {
-        setuser(newUser);
-      } else {
-        setuser(null);
-      }
+//     return unsubscribe
+//   }, [])
 
-      setData("user", newUser);
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  const signIn = async (email, password) => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-    } catch (err) {
-      console.log(err);
-      throw Error(err);
-    }
-  };
-
-  const signOut = async () => {
-    try {
-      await auth.signOut();
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const value = {
-    user,
-    setuser,
-    signIn,
-    signOut
-  };
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-}
+//   const value = {
+//     user,
+//     setuser
+//   }
+//   return (
+//    <AuthContext.Provider value={value}>
+//     {children}
+//    </AuthContext.Provider>
+//   )
+// }

@@ -41,7 +41,7 @@ export default function HomePage() {
         <View>
           <Image
             source={assets.gradient}
-            style={{ position: "absolute", marginTop: 2 }}
+            style={{ position: "absolute", marginTop:2, left: 0, right: 0 }}
           ></Image>
         </View>
         <View style={styles.abtnprem}>
@@ -76,23 +76,17 @@ export default function HomePage() {
                 color: "#333A73",
                 fontSize: 25,
                 fontWeight: "bold",
-                marginLeft: 25,
-                marginTop: 45,
+                left: 50,
+                bottom: 40,
+                position:"absolute",
               }}
             >
               WELCOME!
             </Text>
-            
           </View>
 
-          <Image
-            style={{ width: 30, height: 30 }}
-            source={assets["calendar-icon"]}
-          />
-          <Pressable style={{ paddingBottom: 10 }}>
-            <Text>Add</Text>
-          </Pressable>
-          <View style={{ paddingRight: 10 }}>
+          
+          <View style={{ paddingRight: 10, marginTop: 5 }}>
             <View
               style={{
                 backgroundColor: "white",
@@ -100,7 +94,9 @@ export default function HomePage() {
                 height: 80,
                 borderRadius: 100,
                 alignItems: "center",
-                justifyContent: "flex-end",
+                justifyContent: "flex-end", 
+                marginTop: 10,
+                marginRight: 25
               }}
             >
               <Image
@@ -112,17 +108,19 @@ export default function HomePage() {
         </View>
       </View>
       <View style={styles.content}>
+
         <Text
           style={{
             color: "#333A73",
             fontSize: 20,
             fontWeight: "bold",
-            marginLeft: 10,
-            marginTop: 20,
+            marginLeft: 15,
+            marginTop: 0,
           }}
         >
           Choose your Recipe
         </Text>
+
         <RecipeList recipes={createdRecipes} />
 
         {/* Tags */}
@@ -225,9 +223,22 @@ export default function HomePage() {
               >
                 dessert
               </Text>
+
             </TouchableOpacity>
           </View>
+          
         </View>
+        <Text
+          style={{
+            color: "#333A73",
+            fontSize: 20,
+            fontWeight: "bold",
+            marginLeft: 15,
+            marginTop: 0,
+          }}
+        >
+          According to your Favorites ...
+        </Text>
       </View>
     </View>
   );
@@ -246,11 +257,11 @@ const styles = StyleSheet.create({
 
   content: {},
   abtnprem: {
+
     flexDirection: "row",
     alignItems: "flex-start",
     justifyContent: "space-around",
     alignContent: "flex-start",
-    top: 20,
     marginTop: 20,
   },
   headerbottom: {
