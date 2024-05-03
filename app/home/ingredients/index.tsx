@@ -22,10 +22,10 @@ export default function Ingredients() {
     setIsInputScreenVisible(!isInputScreenVisible);
   };
 
-  const { setIngredients, ingredients, createdRecipes, setCreatedRecipes } =
+  const { createdIngredients, setCreatedIngredients, favoriteRecipes } =
     useDataContext();
 
-  const [text1, setText1] = useState("");
+  const [ingredientName, setIngredientName] = useState("");
   const [purchaseDate, setPurchaseDate] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
   const [daysUntilExpiration, setDaysUntilExpiration] = useState("");
@@ -36,28 +36,10 @@ export default function Ingredients() {
   const [isExpiryDateVisible, setIsExpiryDateVisible] = useState(false);
   const [isPurchaseDateVisible, setIsPurchaseDateVisible] = useState(false);
 
-  const handleDelete = (index) => {
-    const deletedIngredient = ingredients[index];
-
-    if (!deletedIngredient) {
-      console.error("Cannot delete ingredient at index:", index);
-      return;
-    }
-
-    const newDisplayText = ingredients.filter((ingredient, i) => i !== index);
-    setIngredients(newDisplayText);
-
-    const updatedRecipes = createdRecipes.filter(
-      (recipe) => recipe.ingredient !== ingredients[index].name
-    );
-
-    const updatedMarkedDates = { ...markedDates };
-    delete updatedMarkedDates[deletedIngredient.expirationDate];
-    setmarkedDates(updatedMarkedDates);
-  };
+  
 
   const handleInputChange = (text) => {
-    setText1(text);
+    setIngredientName(text);
   };
 
   const togglePurhaseDate = () => {
@@ -83,12 +65,28 @@ export default function Ingredients() {
     updatedMarkedDates[date] = { selected: true, marked: true };
     setmarkedDates(updatedMarkedDates);
 
-    const ingredientsForSelectedDate = ingredients.filter(
+    const ingredientsForSelectedDate = createdIngredients.filter(
       (ingredient) => ingredient.expirationDate === date
     );
     setSelectedDateIngredients(ingredientsForSelectedDate);
   };
 
+  const handleDelete = (index, name) => {
+    const deletedIngredient = createdIngredients[index];
+
+    if (!deletedIngredient) {
+      console.error("Cannot delete ingredient at index:", index);
+      return;
+    }
+    const newIngredients = createdIngredients.filter((ingredient, i) => i !== index);
+    setCreatedIngredients(newIngredients);
+
+    const updatedMarkedDates = { ...markedDates };
+    delete updatedMarkedDates[deletedIngredient.expirationDate];
+    setmarkedDates(updatedMarkedDates);
+  };
+
+  
   const fetchRecipes = async (ingredient) => {
     try {
       const response = await fetch(
@@ -112,7 +110,7 @@ export default function Ingredients() {
   };
 
   const handlePress = async () => {
-    if (text1.trim() !== "") {
+    if (ingredientName.trim() !== "") {
       try {
         if (!purchaseDate || !expirationDate) {
           alert("Please enter both purchase date and expiration date.");
@@ -120,14 +118,14 @@ export default function Ingredients() {
         }
 
         const response = await fetch(
-          `https://api.edamam.com/api/food-database/v2/parser?ingr=${text1}&app_id=7d110714&app_key=fb587c1ac3389996471cfe7104d369e9`
+          `https://api.edamam.com/api/food-database/v2/parser?ingr=${ingredientName}&app_id=7d110714&app_key=fb587c1ac3389996471cfe7104d369e9`
         );
         const data = await response.json();
 
         if (data.hints.length === 0) {
           console.error(
             "No ingredients found for:",
-            text1,
+            ingredientName,
             ". Please try again with a different ingredient."
           );
           return;
@@ -151,18 +149,21 @@ export default function Ingredients() {
             expirationDate: expirationDate,
             purchaseDate: purchaseDate,
             daysUntilExpiration: daysRemaining,
+            recipes: []
           };
 
-          setIngredients([...ingredients, newIngredient]);
-          setText1("");
+        const fetchedRecipes = await fetchRecipes(ingredientName);
+        
+        newIngredient.recipes = fetchedRecipes
+
+        setCreatedIngredients([...createdIngredients, newIngredient])
+
+          setIngredientName("");
           setPurchaseDate("");
           setExpirationDate("");
           setDaysUntilExpiration(daysRemaining.toString());
-
           handleMarkDate(expirationDate);
-
-          const fetchedRecipes = await fetchRecipes(text1);
-          setCreatedRecipes([...createdRecipes, ...fetchedRecipes]);
+         
         }
       } catch (e) {
         console.error("Error adding ingredient:", e);
@@ -183,7 +184,7 @@ export default function Ingredients() {
       </View>
       <View style={styles.content}>
         <ScrollView style={styles.scrollContainer}>
-          {ingredients.map(({ name, image, daysUntilExpiration }, index) => (
+          {createdIngredients.map(({ name, image, daysUntilExpiration }, index) => (
             <Swipeable
               key={index}
               friction={2}
@@ -191,7 +192,7 @@ export default function Ingredients() {
               renderRightActions={() => (
                 <Pressable
                   onPress={() => {
-                    handleDelete(index);
+                    handleDelete(index, name);
                   }}
                   style={{
                     width: 70,
@@ -291,7 +292,7 @@ export default function Ingredients() {
               placeholder={"Input Ingredient"}
               placeholderTextColor="#888"
               onChangeText={handleInputChange}
-              value={text1}
+              value={ingredientName}
             />
 
             <View>
@@ -386,7 +387,7 @@ export default function Ingredients() {
                 mode="date"
                 onConfirm={handleExpiryDateConfirm}
                 onCancel={toggleExpiryDate}
-              ></DateTimePickerModal>
+              />
             </View>
 
             <TouchableOpacity

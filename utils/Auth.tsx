@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { onAuthStateChanged, signInWithEmailAndPassword, User } from "firebase/auth";
 import { auth } from "./firebase";
-import { setData } from "./asyncstorage";
+import { getData, setData } from "./asyncstorage";
 // import { onAuthStateChanged, User } from 'firebase/auth'
 // import { auth } from './firebase'
 
@@ -29,7 +29,6 @@ export default function AuthProvider({ children }) {
     const unsubscribe = onAuthStateChanged(auth, (newUser) => {
       if (newUser) {
         setuser(newUser);
-        console.log(user?.displayName)
       } else {
         setuser(null);
       }
@@ -41,8 +40,12 @@ export default function AuthProvider({ children }) {
   }, []);
 
   const signIn = async (email, password) => {
+    try {
       await signInWithEmailAndPassword(auth, email, password);
-    
+    } catch (err) {
+      console.log(err);
+      throw Error(err);
+    }
   };
 
   const signOut = async () => {
