@@ -9,6 +9,10 @@ export default function RecipeCard({ recipe }) {
 
   const { favoriteRecipes, setFavoriteRecipes } = useDataContext()
 
+  const openRecipeUrl = (url) => { 
+    Linking.openURL(url);
+  }
+
   const AddRecipesToFavorites = () => {
     //console.log("Adding recipe to favorites:", recipe); 
     // Check if the recipe is already in favorites by label
