@@ -260,8 +260,9 @@ const styles = StyleSheet.create({
 
   scrollContainer: {
     width: "100%",
-    marginTop: 10,
-    marginBottom: 10,
+    // height:"70%",
+    // marginTop: 5,
+    marginBottom: 90,
   },
 
   resultText: {
