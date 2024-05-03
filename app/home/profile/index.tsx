@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View, Image } from "react-native";
+import { Pressable, StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { Link, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -30,32 +30,33 @@ export default function Profile() {
           <Text style={styles.infoLabel}>E-Mail</Text>
           <Text style={styles.infoValue}>{user?.email}</Text>
         </View>
+      </View>
 
+      <View style={styles.notificationContainer}>
+        <Text style={styles.title}>Subscription</Text>
         <View style={styles.infoRow}>
           <Text style={styles.infoLabel}>Subscription</Text>
           <Text style={styles.infoValue}>Standard Plan</Text>
         </View>
+        {/* Upgrade Button */}
+        <Pressable style={styles.upgradeButton}>
+          <Text style={styles.upgradeButtonText}>Subscribe to Premium</Text>
+        </Pressable>
       </View>
-
-      {/* Upgrade Button */}
-      <Pressable style={styles.upgradeButton}>
-        <Text style={styles.upgradeButtonText}>Subscribe to Premium</Text>
-      </Pressable>
 
       {/* Notifications Section */}
       <View style={styles.notificationContainer}>
         <Text style={styles.title}>Notifications</Text>
-
         <View style={styles.infoRow}>
           <Text style={styles.infoLabel}>Push Notification</Text>
           <Text style={styles.infoSwitchText}>ON</Text>
         </View>
       </View>
 
-      {/* Logout Button */}
-      <Pressable style={styles.logoutContainer} onPress={logOut}>
+      {/* Log Out Button */}
+      <TouchableOpacity style={styles.logoutButton} onPress={logOut}>
         <Text style={styles.logoutText}>Log Out</Text>
-      </Pressable>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -72,41 +73,49 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 10,
+    marginBottom: 20,
   },
   infoRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 5,
-    
+    marginBottom: 15,
   },
   infoLabel: {
     fontSize: 16,
     color: "#888",
+    marginBottom: 5
   },
   infoValue: {
     fontSize: 16,
   },
   upgradeButton: {
-    marginTop: 30,
-    padding: 15,
-    backgroundColor: "#eee",
-    borderRadius: 5,
+    marginTop: 10,
+    padding: 20,
+    backgroundColor: "#333A73",
+    borderRadius: 50,
     alignItems: "center",
   },
   upgradeButtonText: {
     fontSize: 16,
+    color: 'white',
+    height: 20
   },
   notificationContainer: {
     marginTop: 30,
   },
-  logoutContainer: {},
+  logoutButton: {
+    marginTop: 30,
+    backgroundColor: "#494949",
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    borderRadius: 50,
+    alignSelf: 'flex-end',
+  },
   logoutText: {
     fontSize: 16,
-    color: "#c00",
+    color: "#fff",
   },
   infoSwitchText: {
-    // Assuming a switch UI for toggling notifications
     fontSize: 16,
   },
 });

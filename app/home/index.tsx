@@ -91,7 +91,7 @@ export default function HomePage() {
                 position: "absolute",
               }}
             >
-              WELCOME!
+              Welcome!
             </Text>
           </View>
 
@@ -252,7 +252,7 @@ export default function HomePage() {
                 height:500
               }}
             >
-              According to your Favorites ...
+              
             </Text>
           </ScrollView>
         </SafeAreaView>

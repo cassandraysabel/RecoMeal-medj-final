@@ -171,6 +171,8 @@ export default function Ingredients() {
     }
   };
 
+
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -221,7 +223,14 @@ export default function Ingredients() {
                 </Pressable>
               )}
             >
-              <View key={index} style={styles.rectangle}>
+              <View key={index}
+                style={[
+                  styles.rectangle,
+                  (daysUntilExpiration === 2 || daysUntilExpiration === 3 || daysUntilExpiration === 1 ) && {
+                    backgroundColor: "yellow",
+                  },
+                  daysUntilExpiration <= 0 && { backgroundColor: "red" },
+                ]}>
                 <View style={styles.displayItem}>
                   <Image source={{ uri: image }} style={styles.image} />
                   <View style={styles.textposition}>
