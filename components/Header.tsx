@@ -26,9 +26,9 @@ const styles = StyleSheet.create({
   },
   bgimage: {
     position: "absolute",
-    left: number;
-    bottom: number;
-    width: number;
-    height: number;
+    // left: number;
+    // bottom: number;
+    // width: number;
+    // height: number;
 }
 })

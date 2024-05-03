@@ -1,35 +1,24 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { Text } from "react-native";
 
 interface iUserData {
   isPremium: boolean;
   setIsPremium: (value: boolean) => void;
-  ingredients: ingredient[];
-  setIngredients: (value: any[]) => void;
+  createdIngredients: any[];
+  setCreatedIngredients: (value: any[]) => void;
   favoriteRecipes: any[];
   setFavoriteRecipes: (value: any[]) => void;
-  createdRecipes: any[];
-  setCreatedRecipes: (value: any[]) => void;
   recommendedFavorites: any[];
   setRecommendedFavorites: (value: any[]) => void;
 }
 
-interface ingredient {
-  name: string;
-  image: any;
-  expirationDate: string;
-  daysUntilExpiration: number;
-};
-
 export const UserDataContext = createContext<iUserData>({
   isPremium: false,
   setIsPremium: () => {},
-  ingredients: [],
-  setIngredients: () => {},
+  createdIngredients: [],
+  setCreatedIngredients: () => {},
   favoriteRecipes: [],
-  setFavoriteRecipes: () => {},
-  createdRecipes: [],
-  setCreatedRecipes: () => {},
+  setFavoriteRecipes:  () => {},
   recommendedFavorites: [],
   setRecommendedFavorites: () => {},
 });
@@ -42,22 +31,28 @@ export const useDataContext = () => {
   return context;
 };
 
+type ingredient =  {
+  name: string,
+  image: string,
+  expirationDate: string,
+  purchaseDate: string,
+  daysUntilExpiration: number,
+  recipes : []
+}
+
 const RecipeProvider = ({ children }) => {
   const [isPremium, setIsPremium] = useState(false);
-  const [ingredients, setIngredients] = useState<ingredient[]>([]);
-  const [createdRecipes, setCreatedRecipes] = useState([]);
+  const [createdIngredients, setCreatedIngredients] = useState<ingredient[]>([]);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [recommendedFavorites, setRecommendedFavorites] = useState([]);
 
   const value = {
     isPremium,
     setIsPremium,
-    ingredients,
-    setIngredients,
     favoriteRecipes,
     setFavoriteRecipes,
-    createdRecipes,
-    setCreatedRecipes,
+   createdIngredients,
+   setCreatedIngredients,
     recommendedFavorites,
     setRecommendedFavorites,
   };

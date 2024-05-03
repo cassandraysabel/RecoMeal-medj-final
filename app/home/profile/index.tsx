@@ -21,7 +21,6 @@ export default function Profile() {
     <SafeAreaView style={styles.container}>
       <View style={styles.accountInfoContainer}>
         <Text style={styles.title}>Account Information</Text>
-
         <View style={styles.infoRow}>
           <Text style={styles.infoLabel}>Name</Text>
           <Text style={styles.infoValue}>{user?.displayName}</Text>
@@ -79,6 +78,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 5,
+    
   },
   infoLabel: {
     fontSize: 16,
