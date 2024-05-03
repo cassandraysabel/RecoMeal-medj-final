@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Linking,
+  SafeAreaView
 } from "react-native";
 import { Link } from "expo-router";
 import { assets } from "../../../components/assets";
@@ -72,7 +73,7 @@ export default function FavoritesScreen() {
                 <Text style={{ fontSize: 10, fontWeight: "bold" }}>
                   Ingredients:
                 </Text>
-                <ScrollView style={{ flex: 1, maxWidth: 250 }}>
+                <ScrollView style={{ flex: 1, maxWidth: 250}}>
                   <View>
                     {item.recipe &&
                       item.recipe.ingredients.map((ingredient, index) => (
@@ -114,7 +115,7 @@ export default function FavoritesScreen() {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Image source={assets.gradient} style={{ zIndex: 1 }} />
         <Image
@@ -125,7 +126,7 @@ export default function FavoritesScreen() {
         <Text style={styles.ingredientsText}>Favorites</Text>
       </View>
       <FavoritesScreen />
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -133,6 +134,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
+    backgroundColor: "#fff",
+    alignItems: "center",
+    // justifyContent: "flex-start",
+  
   },
   header: {
     width: "100%",
@@ -143,7 +148,7 @@ const styles = StyleSheet.create({
     left: 0,
     bottom: 0,
     width: 300,
-    height: 200,
+    height: 100,
   },
   ingredientsText: {
     color: "#333A73",
@@ -151,6 +156,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     position: "absolute",
     right: 10,
+    top: 30,
+    zIndex: 1
   },
   overlay: {
     position: "absolute",
@@ -170,8 +177,8 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     opacity: 1,
-    position: "absolute",
-    marginTop: 40,
+    position: "relative",
+    marginTop: 50,
     marginRight: 50,
   },
   navigationBar: {
@@ -199,5 +206,21 @@ const styles = StyleSheet.create({
   descriptionText: {
     fontSize: 10,
     color: "white",
+  },
+  favorite_rectangle: {
+    width:"100%",
+    height:160,
+    backgroundColor:'white',
+    justifyContent:'center',
+    marginVertical:8,      
+    
+
+  },
+
+  favorite_image: {
+    width:100,
+    height:100,
+    borderRadius:50,
+    
   },
 });

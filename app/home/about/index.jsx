@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity, FlatList, StyleSheet, Linking, KeyboardAvoidingView } from 'react-native';
-import Index from '../..';
 
 const About = () => {
   const [comment, setComment] = useState('');
@@ -46,12 +45,6 @@ const About = () => {
   };
 
   return (
-    <View>
-
-    <View style={styles.imageContainer}>
-    <Image source={require("../../../assets/abt-bg.png")} style={styles.abtimg}/>
-    </View>
-    
     <KeyboardAvoidingView style={styles.container} behavior="height">
       <Text style={styles.about}>MEET THE TEAM</Text>
       <View style={styles.developersContainer}>
@@ -91,7 +84,6 @@ const About = () => {
         <Text style={styles.submitButtonText}>Submit</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
-    </View>
   );
 };
 
@@ -100,35 +92,21 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    width: "100%",
-    height: "100%"
+    paddingHorizontal: 20,
   },
   about: {
     fontSize: 23,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
-    marginTop: 23,
-  },
-  abtimg:{
-    width: "100%",
-    height: "100%",
-    position: 'absolute',
-
-  },
-  imageContainer: {
-    flex: 1,
-    position: 'absolute',
-    width: "100%",
-    height: "100%",
-    resizeMode:'cover'
+    marginTop: 23, // Adjusted top margin
   },
   feedback: {
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
-    marginTop: 23
+    marginTop: 23, // Adjusted top margin
   },
   developersContainer: {
     marginBottom: 20,
@@ -184,12 +162,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     borderRadius: 5,
     alignSelf: 'flex-end', // Align button to the right
+    marginBottom: 10
   },
   submitButtonText: {
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
-    fontSize: 15,
+    fontSize: 12,
+    
   },
 });
 
