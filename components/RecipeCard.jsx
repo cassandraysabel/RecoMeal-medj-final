@@ -1,12 +1,36 @@
 import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { assets } from './assets';
 import { ScrollView } from 'react-native';
+import { useDataContext } from '../utils/UserData';
+import FavoritesScreen from '../app/home/favorites';
 
 export default function RecipeCard({ recipe }) {
 
-  const openRecipeUrl = (url) => {
-    Linking.openURL(url);
+  const { favoriteRecipes, setFavoriteRecipes } = useDataContext()
+  // const { favorite, setFavorite} = useState(false)
+
+
+  // const toggle = () => {
+  //   favorite(!setFavorite);
+  // }
+
+  // const [favoriteRecipes, setfavoriteRecipes]= useState([]);
+
+  const AddRecipesToFavorites = () => {
+    //console.log("Adding recipe to favorites:", recipe); 
+    // Check if the recipe is already in favorites by label
+    if (favoriteRecipes.some((favRecipe) => favRecipe.recipe.label === recipe.recipe.label)) {
+      console.log("Recipe already exists in favorites.");
+      return;
+    }
+
+    console.log(recipe)
+
+    const updatedFavorites = [...favoriteRecipes, recipe];
+    setFavoriteRecipes(updatedFavorites);
+    
+    //console.log("Updated favorite recipes:", updatedFavorites); 
   }
 
   return (
@@ -77,10 +101,14 @@ export default function RecipeCard({ recipe }) {
                 marginLeft: 0,
               }}
             >
+              <TouchableOpacity onPress={AddRecipesToFavorites }>
               <Image
                 source={assets['heart-icon']}
                 style={{ width: 13, height: 10 }}
               ></Image>
+
+              </TouchableOpacity>
+              
             </View>
 
             <Text style={{ fontSize: 6, fontWeight: "500", color: "black" }}>

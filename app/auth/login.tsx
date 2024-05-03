@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -8,22 +8,28 @@ import {
   StyleSheet,
 } from "react-native";
 import { Link, router } from "expo-router";
-import { signIn } from "../../utils/firebase";
+import { useAuth } from "../../utils/Auth";
 
 export default function Login() {
+  const { signIn, user } = useAuth();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [usernameFocused, setUsernameFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
 
+  useEffect(() => {
+    if (user != null) router.replace("/home")
+  }, [])
+  
   const logIn = async () => {
     try {
       if (!email || !password) {
         alert("Please fill all the fields");
       }
-      await signIn(email, password);
-      console.log("Logged in");
-      router.replace("/home");
+      await signIn(email, password).then(() => {
+        router.replace("/home");
+      });
     } catch (err) {
       console.log(err);
     }

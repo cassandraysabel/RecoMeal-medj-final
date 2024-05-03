@@ -1,8 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const getItem = async (key) => {
+export const getData = async (key) => {
   try {
-    await AsyncStorage.getItem("user-data");
+    return await AsyncStorage.getItem(key);
   } catch (err) {
     console.log(err)
   }

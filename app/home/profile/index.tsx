@@ -1,13 +1,22 @@
-import { Pressable, StyleSheet, Text, View, Image } from 'react-native';
-import React from 'react';
-import { Link } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { auth } from '../../../utils/firebase';
-
+import { Pressable, StyleSheet, Text, View, Image } from "react-native";
+import React from "react";
+import { Link, router } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { auth } from "../../../utils/firebase";
+import { useAuth } from "../../../utils/Auth";
+//
 
 export default function Profile() {
+  const { user, signOut } = useAuth();
 
-  const { user } = useauth
+  const logOut = async () => {
+    try {
+      router.replace("/auth/login");
+      await signOut();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -16,12 +25,12 @@ export default function Profile() {
 
         <View style={styles.infoRow}>
           <Text style={styles.infoLabel}>Name</Text>
-          <Text style={styles.infoValue}>{user.displayName}</Text>
+          <Text style={styles.infoValue}>{user?.displayName}</Text>
         </View>
 
         <View style={styles.infoRow}>
           <Text style={styles.infoLabel}>E-Mail</Text>
-          <Text style={styles.infoValue}>{user.email}</Text>
+          <Text style={styles.infoValue}>{user?.email}</Text>
         </View>
 
         <View style={styles.infoRow}>
@@ -46,11 +55,9 @@ export default function Profile() {
       </View>
 
       {/* Logout Button */}
-      <View style={styles.logoutContainer}>
-        <Link href={"auth/login"}>
-          <Text style={styles.logoutText}>Log Out</Text>
-        </Link>
-      </View>
+      <Pressable style={styles.logoutContainer} onPress={logOut}>
+        <Text style={styles.logoutText}>Log Out</Text>
+      </Pressable>
     </SafeAreaView>
   );
 }
@@ -58,7 +65,7 @@ export default function Profile() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     paddingHorizontal: 20,
   },
   accountInfoContainer: {
@@ -66,17 +73,17 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 10,
   },
   infoRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginBottom: 5,
   },
   infoLabel: {
     fontSize: 16,
-    color: '#888',
+    color: "#888",
   },
   infoValue: {
     fontSize: 16,
@@ -84,9 +91,9 @@ const styles = StyleSheet.create({
   upgradeButton: {
     marginTop: 30,
     padding: 15,
-    backgroundColor: '#eee',
+    backgroundColor: "#eee",
     borderRadius: 5,
-    alignItems: 'center',
+    alignItems: "center",
   },
   upgradeButtonText: {
     fontSize: 16,
@@ -94,13 +101,13 @@ const styles = StyleSheet.create({
   notificationContainer: {
     marginTop: 30,
   },
-  logoutContainer: {
-  },
+  logoutContainer: {},
   logoutText: {
     fontSize: 16,
-    color: '#c00',
+    color: "#c00",
   },
-  infoSwitchText: { // Assuming a switch UI for toggling notifications
+  infoSwitchText: {
+    // Assuming a switch UI for toggling notifications
     fontSize: 16,
   },
 });

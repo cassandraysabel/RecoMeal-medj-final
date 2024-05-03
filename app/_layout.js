@@ -3,18 +3,18 @@ import React from "react";
 import { Slot } from "expo-router";
 import RecipeProvider from "../utils/UserData";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-// import AuthProvider from "../utils/Auth";
+import AuthProvider from "../utils/Auth";
 
 export default function Layout() {
   return (
     <GestureHandlerRootView>
-      {/* <AuthProvider> */}
+      <AuthProvider>
         <RecipeProvider>
           <SafeAreaView style={styles.container}>
             <Slot />
           </SafeAreaView>
         </RecipeProvider>
-      {/* </AuthProvider> */}
+      </AuthProvider>
     </GestureHandlerRootView>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Dimensions,
@@ -13,7 +13,8 @@ import {
 import { assets } from "../../components/assets";
 import RecipeList from "../../components/RecipeList";
 import { useDataContext } from "../../utils/UserData";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
+import { useAuth } from "../../utils/Auth";
 
 const ScreenWidth = Dimensions.get("window").width;
 
@@ -34,6 +35,14 @@ export default function HomePage() {
       console.log(`Tag '${tag}' activated`);
     }
   };
+
+  const { user } = useAuth();
+
+  useEffect(()=> {
+    console.log("logged in! ", user?.displayName)
+
+    if (!user) router.replace('auth/login')
+  })
 
   return (
     <View style={styles.container}>
