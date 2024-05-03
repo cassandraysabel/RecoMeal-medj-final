@@ -182,6 +182,21 @@ export default function Ingredients() {
         <Text style={styles.ingredientsText}>Ingredients</Text>
       </View>
       <View style={styles.content}>
+
+      <TouchableOpacity
+            style={styles.searchbar}
+            onPress={toggleInputScreen}
+          >
+            <Text
+              style={{
+                color: "black",
+                fontSize: 16,
+                justifyContent: "center",
+              }}
+            >
+              Add Ingredient
+            </Text>
+          </TouchableOpacity>
         <ScrollView style={styles.scrollContainer}>
           {ingredients.map(({ name, image, daysUntilExpiration }, index) => (
             <Swipeable
@@ -218,20 +233,7 @@ export default function Ingredients() {
               </View>
             </Swipeable>
           ))}
-          <TouchableOpacity
-            style={styles.searchbar}
-            onPress={toggleInputScreen}
-          >
-            <Text
-              style={{
-                color: "black",
-                fontSize: 16,
-                justifyContent: "center",
-              }}
-            >
-              Add Ingredient
-            </Text>
-          </TouchableOpacity>
+          
         </ScrollView>
       </View>
 
@@ -438,6 +440,7 @@ const styles = StyleSheet.create({
     marginTop: 25,
     marginBottom: 10,
     paddingLeft: 5,
+
   },
   button: {
     backgroundColor: "#1F41BB",
@@ -491,12 +494,14 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 1,
     shadowRadius: 4,
+    borderRadius: 20,
   },
 
   scrollContainer: {
     flex: 1,
     width: "100%",
     paddingTop: 20,
+    
   },
 
   resultText: {
@@ -522,7 +527,7 @@ const styles = StyleSheet.create({
     left: 0,
     bottom: 0,
     width: 300,
-    height: 200,
+    height: 100,
   },
 
   ingredientsText: {
@@ -531,6 +536,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     position: "absolute",
     right: 10,
+    top: 40,
+    zIndex: 1
   },
 
   overlay: {
