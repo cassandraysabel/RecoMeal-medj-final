@@ -2,10 +2,13 @@
 import { initializeApp } from "firebase/app";
 import {
   createUserWithEmailAndPassword,
-  getAuth,
+  getReactNativePersistence,
+  initializeAuth,
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -24,23 +27,10 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const signIn = async (email, password) => {
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-  } catch (err) {
-    console.log(err);
-    throw Error(err);
-  }
-};
+export const auth = initializeAuth(app, {
+  persistence: getReactNativePersistence(AsyncStorage)
+})
 
-export const signOut = async () => {
-  try {
-    await auth.signOut();
-  } catch (err) {
-    console.log(err);
-  }
-};
 
 export const createUser = async (name, email, password) => {
   try {
