@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     borderRadius: 5,
     alignSelf: 'flex-end', // Align button to the right
-    marginBottom: 10
+    marginBottom: 60
   },
   submitButtonText: {
     color: 'white',

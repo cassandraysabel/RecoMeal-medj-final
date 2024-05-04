@@ -5,7 +5,7 @@ import RecipeCard from "./RecipeCard";
 export default function RecipeList({ recipes, ingredient }) {
   return (
     <View >
-      <View style={{height: 26, paddingLeft: 20, marginBottom: 2}}>
+      <View style={{height: 28, paddingLeft: 20, marginBottom: 2}}>
        <Text style={{fontSize: 20, color: '#FBA834' }}>{ingredient}</Text>
         
 

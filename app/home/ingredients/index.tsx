@@ -36,8 +36,6 @@ export default function Ingredients() {
   const [isExpiryDateVisible, setIsExpiryDateVisible] = useState(false);
   const [isPurchaseDateVisible, setIsPurchaseDateVisible] = useState(false);
 
-  
-
   const handleInputChange = (text) => {
     setIngredientName(text);
   };
@@ -78,7 +76,9 @@ export default function Ingredients() {
       console.error("Cannot delete ingredient at index:", index);
       return;
     }
-    const newIngredients = createdIngredients.filter((ingredient, i) => i !== index);
+    const newIngredients = createdIngredients.filter(
+      (ingredient, i) => i !== index
+    );
     setCreatedIngredients(newIngredients);
 
     const updatedMarkedDates = { ...markedDates };
@@ -86,7 +86,6 @@ export default function Ingredients() {
     setmarkedDates(updatedMarkedDates);
   };
 
-  
   const fetchRecipes = async (ingredient) => {
     try {
       const response = await fetch(
@@ -149,29 +148,26 @@ export default function Ingredients() {
             expirationDate: expirationDate,
             purchaseDate: purchaseDate,
             daysUntilExpiration: daysRemaining,
-            recipes: []
+            recipes: [],
           };
 
-        const fetchedRecipes = await fetchRecipes(ingredientName);
-        
-        newIngredient.recipes = fetchedRecipes
+          const fetchedRecipes = await fetchRecipes(ingredientName);
 
-        setCreatedIngredients([...createdIngredients, newIngredient])
+          newIngredient.recipes = fetchedRecipes;
+
+          setCreatedIngredients([...createdIngredients, newIngredient]);
 
           setIngredientName("");
           setPurchaseDate("");
           setExpirationDate("");
           setDaysUntilExpiration(daysRemaining.toString());
           handleMarkDate(expirationDate);
-         
         }
       } catch (e) {
         console.error("Error adding ingredient:", e);
       }
     }
   };
-
-
 
   return (
     <View style={styles.container}>
@@ -185,65 +181,66 @@ export default function Ingredients() {
         <Text style={styles.ingredientsText}>Ingredients</Text>
       </View>
       <View style={styles.content}>
-
-      <TouchableOpacity
-            style={styles.searchbar}
-            onPress={toggleInputScreen}
+        <TouchableOpacity style={styles.searchbar} onPress={toggleInputScreen}>
+          <Text
+            style={{
+              color: "black",
+              fontSize: 16,
+              justifyContent: "center",
+            }}
           >
-            <Text
-              style={{
-                color: "black",
-                fontSize: 16,
-                justifyContent: "center",
-              }}
-            >
-              Add Ingredient
-            </Text>
-          </TouchableOpacity>
+            Add Ingredient
+          </Text>
+        </TouchableOpacity>
         <ScrollView style={styles.scrollContainer}>
-          {createdIngredients.map(({ name, image, daysUntilExpiration }, index) => (
-            <Swipeable
-              key={index}
-              friction={2}
-              rightThreshold={70}
-              renderRightActions={() => (
-                <Pressable
-                  onPress={() => {
-                    handleDelete(index, name);
-                  }}
-                  style={{
-                    width: 70,
-                    height: 69,
-                    backgroundColor: "red",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
+          {createdIngredients.map(
+            ({ name, image, daysUntilExpiration }, index) => (
+              <Swipeable
+                key={index}
+                friction={2}
+                rightThreshold={70}
+                renderRightActions={() => (
+                  <Pressable
+                    onPress={() => {
+                      handleDelete(index, name);
+                    }}
+                    style={{
+                      width: 70,
+                      height: 69,
+                      backgroundColor: "red",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Text style={{ color: "white" }}>Delete</Text>
+                  </Pressable>
+                )}
+              >
+                <View
+                  key={index}
+                  style={[
+                    styles.rectangle,
+                    (daysUntilExpiration === 2 ||
+                      daysUntilExpiration === 3 ||
+                      daysUntilExpiration === 1) && {
+                      backgroundColor: "yellow",
+                    },
+                    daysUntilExpiration <= 0 && { backgroundColor: "red" },
+                  ]}
                 >
-                  <Text style={{ color: "white" }}>Delete</Text>
-                </Pressable>
-              )}
-            >
-              <View key={index}
-                style={[
-                  styles.rectangle,
-                  (daysUntilExpiration === 2 || daysUntilExpiration === 3 || daysUntilExpiration === 1 ) && {
-                    backgroundColor: "yellow",
-                  },
-                  daysUntilExpiration <= 0 && { backgroundColor: "red" },
-                ]}>
-                <View style={styles.displayItem}>
-                  <Image source={{ uri: image }} style={styles.image} />
-                  <View style={styles.textposition}>
-                    <Text style={styles.displayText}>{name}</Text>
-                    <Text style={styles.resultText}>
-                      Will expire on: {daysUntilExpiration} days
-                    </Text>
+                  <View style={styles.displayItem}>
+                    <Image source={{ uri: image }} style={styles.image} />
+                    <View style={styles.textposition}>
+                      <Text style={styles.displayText}>{name}</Text>
+                      <Text style={styles.resultText}>
+                        Will expire on: {daysUntilExpiration} day(s)
+                      </Text>
+                    </View>
                   </View>
                 </View>
-              </View>
-            </Swipeable>
-          ))}
-          
+              </Swipeable>
+            )
+          )}
         </ScrollView>
       </View>
 
@@ -402,10 +399,11 @@ export default function Ingredients() {
             </View>
 
             <TouchableOpacity
-              onPress={
-                handlePress
-              }
-              style={[styles.button, { marginTop: 15, height: 30, justifyContent: 'center'}]}
+              onPress={handlePress}
+              style={[
+                styles.button,
+                { marginTop: 15, height: 30, justifyContent: "center" },
+              ]}
             >
               <Text style={[styles.buttonText, {}]}>ADD</Text>
             </TouchableOpacity>
@@ -450,7 +448,6 @@ const styles = StyleSheet.create({
     marginTop: 25,
     marginBottom: 10,
     paddingLeft: 5,
-
   },
   button: {
     backgroundColor: "#1F41BB",
@@ -511,7 +508,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     paddingTop: 20,
-    
   },
 
   resultText: {
@@ -547,7 +543,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 10,
     top: 40,
-    zIndex: 1
+    zIndex: 1,
   },
 
   overlay: {
