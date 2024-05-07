@@ -119,24 +119,24 @@ export default function SignUp() {
         </View>
       </View>
 
-      <Text>Or continue with</Text>
-      <View style={styles.iconContainer}>
-        <TouchableOpacity key="fb" style={styles.iconWrapper}>
+      {/* <Text>Or continue with</Text> */}
+      {/* <View style={styles.iconContainer}> */}
+        {/* <TouchableOpacity key="fb" style={styles.iconWrapper}>
           <Image style={styles.icon} source={require("../../assets/fb.png")} />
-        </TouchableOpacity>
-        <TouchableOpacity key="google" style={styles.iconWrapper}>
+        </TouchableOpacity> */}
+        {/* <TouchableOpacity key="google" style={styles.iconWrapper}>
           <Image
             style={styles.icon}
             source={require("../../assets/google.png")}
           />
-        </TouchableOpacity>
-        <TouchableOpacity key="apple" style={styles.iconWrapper}>
+        </TouchableOpacity> */}
+        {/* <TouchableOpacity key="apple" style={styles.iconWrapper}>
           <Image
             style={styles.icon}
             source={require("../../assets/apple-logo.png")}
           />
-        </TouchableOpacity>
-      </View>
+        </TouchableOpacity> */}
+      {/* </View> */}
     </View>
   );
 }
