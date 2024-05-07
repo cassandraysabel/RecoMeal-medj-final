@@ -22,11 +22,10 @@ export default function Ingredients() {
     setIsInputScreenVisible(!isInputScreenVisible);
   };
 
-  const { createdIngredients, setCreatedIngredients, favoriteRecipes } =
-    useDataContext();
+  const { createdIngredients, setCreatedIngredients } = useDataContext();
 
   const [ingredientName, setIngredientName] = useState("");
-  const [purchaseDate, setPurchaseDate] = useState("");
+  const [purchaseDate, setPurchaseDate] = useState(moment().format("YYYY-MM-DD"));
   const [expirationDate, setExpirationDate] = useState("");
   const [daysUntilExpiration, setDaysUntilExpiration] = useState("");
 
@@ -91,11 +90,9 @@ export default function Ingredients() {
     const dateA = new Date(a.expirationDate).getTime();
     const dateB = new Date(b.expirationDate).getTime();
 
-    // Sort by ascending order of expiration dates
     return dateA - dateB;
   };
 
-  // Sort ingredients array by expiration date
   const sortedIngredients = [...createdIngredients].sort(sortByExpirationDate);
 
   const fetchRecipes = async (ingredient) => {
@@ -119,8 +116,6 @@ export default function Ingredients() {
       return [];
     }
   };
-
-  
 
   const handlePress = async () => {
     if (ingredientName.trim() !== "") {
@@ -165,10 +160,14 @@ export default function Ingredients() {
             recipes: [],
           };
 
-          const fetchedRecipes = await fetchRecipes(ingredientName);
+          const existingRecipe = createdIngredients.find(
+            (ingredient) => ingredient.name === newIngredient.name
+          );
 
-          newIngredient.recipes = fetchedRecipes;
-
+          if (!existingRecipe) {
+            const fetchedRecipes = await fetchRecipes(ingredientName);
+            newIngredient.recipes = fetchedRecipes;
+          }
           setCreatedIngredients([...createdIngredients, newIngredient]);
 
           setIngredientName("");
@@ -207,53 +206,55 @@ export default function Ingredients() {
           </Text>
         </TouchableOpacity>
         <ScrollView style={styles.scrollContainer}>
-        {sortedIngredients.map(({ name, image, daysUntilExpiration }, index) => (
-          <Swipeable
-            key={index}
-            friction={2}
-            rightThreshold={70}
-            renderRightActions={() => (
-              <Pressable
-                onPress={() => {
-                  handleDelete(index, name);
-                }}
-                style={{
-                  width: 70,
-                  height: 69,
-                  backgroundColor: "red",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
+          {sortedIngredients.map(
+            ({ name, image, daysUntilExpiration }, index) => (
+              <Swipeable
+                key={index}
+                friction={2}
+                rightThreshold={70}
+                renderRightActions={() => (
+                  <Pressable
+                    onPress={() => {
+                      handleDelete(index, name);
+                    }}
+                    style={{
+                      width: 70,
+                      height: 69,
+                      backgroundColor: "red",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Text style={{ color: "white" }}>Delete</Text>
+                  </Pressable>
+                )}
               >
-                <Text style={{ color: "white" }}>Delete</Text>
-              </Pressable>
-            )}
-          >
-            <View
-              key={index}
-              style={[
-                styles.rectangle,
-                (daysUntilExpiration === 2 ||
-                  daysUntilExpiration === 3 ||
-                  daysUntilExpiration === 1) && {
-                  backgroundColor: "yellow",
-                },
-                daysUntilExpiration <= 0 && { backgroundColor: "red" },
-              ]}
-            >
-              <View style={styles.displayItem}>
-                <Image source={{ uri: image }} style={styles.image} />
-                <View style={styles.textposition}>
-                  <Text style={styles.displayText}>{name}</Text>
-                  <Text style={styles.resultText}>
-                    Will expire on: {daysUntilExpiration} day(s)
-                  </Text>
+                <View
+                  key={index}
+                  style={[
+                    styles.rectangle,
+                    (daysUntilExpiration === 2 ||
+                      daysUntilExpiration === 3 ||
+                      daysUntilExpiration === 1) && {
+                      backgroundColor: "yellow",
+                    },
+                    daysUntilExpiration <= 0 && { backgroundColor: "red" },
+                  ]}
+                >
+                  <View style={styles.displayItem}>
+                    <Image source={{ uri: image }} style={styles.image} />
+                    <View style={styles.textposition}>
+                      <Text style={styles.displayText}>{name}</Text>
+                      <Text style={styles.resultText}>
+                        Will expire on: {daysUntilExpiration} day(s)
+                      </Text>
+                    </View>
+                  </View>
                 </View>
-              </View>
-            </View>
-          </Swipeable>
-        ))}
-      </ScrollView>
+              </Swipeable>
+            )
+          )}
+        </ScrollView>
       </View>
 
       <Modal

@@ -131,6 +131,9 @@ export default function HomePage() {
               Choose your Recipe
             </Text>
             {createdIngredients.map((ingredient) => {
+              if (ingredient.recipes.length === 0) {
+                return <View />;
+              }
               return (
                 <RecipeList
                   ingredient={ingredient.name}
@@ -249,11 +252,9 @@ export default function HomePage() {
                 fontWeight: "bold",
                 marginLeft: 15,
                 marginTop: 0,
-                height:500
+                height: 500,
               }}
-            >
-              
-            </Text>
+            ></Text>
           </ScrollView>
         </SafeAreaView>
       </View>
@@ -270,6 +271,7 @@ const styles = StyleSheet.create({
   header: {
     width: "100%",
     position: "relative",
+    marginTop: -30,
   },
 
   abtnprem: {

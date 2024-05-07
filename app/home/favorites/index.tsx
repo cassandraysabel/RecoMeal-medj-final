@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     position: "absolute",
     right: 10,
-    top: 30,
+    top: 40,
     zIndex: 1
   },
   overlay: {
