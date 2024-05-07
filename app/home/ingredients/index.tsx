@@ -86,6 +86,18 @@ export default function Ingredients() {
     setmarkedDates(updatedMarkedDates);
   };
 
+  const sortByExpirationDate = (a, b) => {
+    // Convert expiration dates to Date objects
+    const dateA = new Date(a.expirationDate).getTime();
+    const dateB = new Date(b.expirationDate).getTime();
+
+    // Sort by ascending order of expiration dates
+    return dateA - dateB;
+  };
+
+  // Sort ingredients array by expiration date
+  const sortedIngredients = [...createdIngredients].sort(sortByExpirationDate);
+
   const fetchRecipes = async (ingredient) => {
     try {
       const response = await fetch(
@@ -107,6 +119,8 @@ export default function Ingredients() {
       return [];
     }
   };
+
+  
 
   const handlePress = async () => {
     if (ingredientName.trim() !== "") {
@@ -193,55 +207,53 @@ export default function Ingredients() {
           </Text>
         </TouchableOpacity>
         <ScrollView style={styles.scrollContainer}>
-          {createdIngredients.map(
-            ({ name, image, daysUntilExpiration }, index) => (
-              <Swipeable
-                key={index}
-                friction={2}
-                rightThreshold={70}
-                renderRightActions={() => (
-                  <Pressable
-                    onPress={() => {
-                      handleDelete(index, name);
-                    }}
-                    style={{
-                      width: 70,
-                      height: 69,
-                      backgroundColor: "red",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Text style={{ color: "white" }}>Delete</Text>
-                  </Pressable>
-                )}
+        {sortedIngredients.map(({ name, image, daysUntilExpiration }, index) => (
+          <Swipeable
+            key={index}
+            friction={2}
+            rightThreshold={70}
+            renderRightActions={() => (
+              <Pressable
+                onPress={() => {
+                  handleDelete(index, name);
+                }}
+                style={{
+                  width: 70,
+                  height: 69,
+                  backgroundColor: "red",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
               >
-                <View
-                  key={index}
-                  style={[
-                    styles.rectangle,
-                    (daysUntilExpiration === 2 ||
-                      daysUntilExpiration === 3 ||
-                      daysUntilExpiration === 1) && {
-                      backgroundColor: "yellow",
-                    },
-                    daysUntilExpiration <= 0 && { backgroundColor: "red" },
-                  ]}
-                >
-                  <View style={styles.displayItem}>
-                    <Image source={{ uri: image }} style={styles.image} />
-                    <View style={styles.textposition}>
-                      <Text style={styles.displayText}>{name}</Text>
-                      <Text style={styles.resultText}>
-                        Will expire on: {daysUntilExpiration} day(s)
-                      </Text>
-                    </View>
-                  </View>
+                <Text style={{ color: "white" }}>Delete</Text>
+              </Pressable>
+            )}
+          >
+            <View
+              key={index}
+              style={[
+                styles.rectangle,
+                (daysUntilExpiration === 2 ||
+                  daysUntilExpiration === 3 ||
+                  daysUntilExpiration === 1) && {
+                  backgroundColor: "yellow",
+                },
+                daysUntilExpiration <= 0 && { backgroundColor: "red" },
+              ]}
+            >
+              <View style={styles.displayItem}>
+                <Image source={{ uri: image }} style={styles.image} />
+                <View style={styles.textposition}>
+                  <Text style={styles.displayText}>{name}</Text>
+                  <Text style={styles.resultText}>
+                    Will expire on: {daysUntilExpiration} day(s)
+                  </Text>
                 </View>
-              </Swipeable>
-            )
-          )}
-        </ScrollView>
+              </View>
+            </View>
+          </Swipeable>
+        ))}
+      </ScrollView>
       </View>
 
       <Modal

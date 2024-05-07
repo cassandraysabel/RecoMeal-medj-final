@@ -28,7 +28,7 @@ const SplashScreen = () => {
         {/* This view covers the whole screen and triggers the GIF visibility */}
         {gifVisible && (
           <View style={styles.gifContainer}>
-            {/* Place your first gif here */}
+       
             <Image
               source={require('../assets/RecoMeal.gif')}
               style={styles.rmgif}
@@ -37,7 +37,7 @@ const SplashScreen = () => {
         )}
         {middleGifVisible && (
           <View style={styles.middleGifContainer}>
-            {/* Place your second gif here */}
+  
             <Image
               source={require('../assets/splash2.gif')}
               style={styles.gif}
