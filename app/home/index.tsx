@@ -17,6 +17,7 @@ import RecipeList from "../../components/RecipeList";
 import { useDataContext } from "../../utils/UserData";
 import { Link, router } from "expo-router";
 import { useAuth } from "../../utils/Auth";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const ScreenWidth = Dimensions.get("window").width;
 
@@ -129,13 +130,27 @@ export default function HomePage() {
               }}
             >
               Choose your Recipe
-            </Text>
-            {createdIngredients.map((ingredient) => {
+            </Text>{
+              (createdIngredients.length === 0) ?  <View style={styles.noIngContainer}>
+            
+            <MaterialCommunityIcons name="pot-steam-outline" size={60} color="#5F648B" style={styles.cookingpot} />
+            <View style={styles.noingtextContainer}>
+            <Text style={styles.noIngredientsText}>
+            No ingredients to display. </Text>
+            
+            <Text style={styles.noIngredientsText}> Try inputting something in the ingredients page.</Text>
+            </View>
+            
+            
+            </View> : <View />
+            }
+            {createdIngredients.map((ingredient, index) => {
               if (ingredient.recipes.length === 0) {
                 return <View />;
               }
               return (
-                <RecipeList
+                <RecipeList 
+                key = {index}
                   ingredient={ingredient.name}
                   recipes={ingredient.recipes}
                 />
@@ -339,4 +354,24 @@ const styles = StyleSheet.create({
   activeButtonText: {
     color: "white",
   },
+  cookingpot: {
+    marginTop: 10,
+    marginBottom: 5,
+    alignSelf: "center",
+  },
+  noIngredientsText:{
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 5,
+    marginBottom: 0, 
+    fontSize: 15,
+    textAlign: "center"
+  },
+  noingtextContainer:{
+    paddingBottom: 10
+  },
+  noIngContainer:{
+    paddingTop: 70,
+    paddingBottom: 70
+  }
 });
