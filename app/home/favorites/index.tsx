@@ -85,7 +85,7 @@ export default function FavoritesScreen() {
                 <Text style={{ fontSize: 10, fontWeight: "bold" }}>
                   Ingredients:
                 </Text>
-                <ScrollView style={{ flex: 1, maxWidth: 250}}>
+                <ScrollView style={{ flex: 1, maxWidth: 250, marginBottom: 10, paddingTop: 5}}>
                   <View>
                     {item.recipe &&
                       item.recipe.ingredients.map((ingredient, index) => (

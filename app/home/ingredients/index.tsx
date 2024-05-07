@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   Image,
   Modal,
   Pressable,
@@ -8,6 +9,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  SafeAreaView
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { assets } from "../../../components/assets";
@@ -34,6 +36,7 @@ export default function Ingredients() {
 
   const [isExpiryDateVisible, setIsExpiryDateVisible] = useState(false);
   const [isPurchaseDateVisible, setIsPurchaseDateVisible] = useState(false);
+  const [isLoading, setisLoading] = useState(false)
 
   const handleInputChange = (text) => {
     setIngredientName(text);
@@ -118,25 +121,27 @@ export default function Ingredients() {
   };
 
   const handlePress = async () => {
+    setisLoading(true)
     if (ingredientName.trim() !== "") {
       try {
-        if (!purchaseDate || !expirationDate) {
+        if (!purchaseDate || !expirationDate   ) {
           alert("Please enter both purchase date and expiration date.");
-          return;
+          return setisLoading(false);
+        }
+        if (!ingredientName){
+          alert("No ingredient found");
+          return setisLoading(false);
         }
 
         const response = await fetch(
           `https://api.edamam.com/api/food-database/v2/parser?ingr=${ingredientName}&app_id=7d110714&app_key=fb587c1ac3389996471cfe7104d369e9`
         );
         const data = await response.json();
+        
 
         if (data.hints.length === 0) {
-          console.error(
-            "No ingredients found for:",
-            ingredientName,
-            ". Please try again with a different ingredient."
-          );
-          return;
+          alert("No ingredients found for " + ingredientName + ". Please try again with a different ingredient.");
+          return setisLoading(false);
         }
 
         if (data.hints && data.hints.length > 0) {
@@ -167,22 +172,39 @@ export default function Ingredients() {
           if (!existingRecipe) {
             const fetchedRecipes = await fetchRecipes(ingredientName);
             newIngredient.recipes = fetchedRecipes;
+            setisLoading(false)
           }
           setCreatedIngredients([...createdIngredients, newIngredient]);
 
           setIngredientName("");
-          setPurchaseDate("");
+          // setPurchaseDate("");
           setExpirationDate("");
           setDaysUntilExpiration(daysRemaining.toString());
           handleMarkDate(expirationDate);
         }
       } catch (e) {
         console.error("Error adding ingredient:", e);
+        alert("Error adding ingredient!");
+        setisLoading(false)
       }
     }
+    setisLoading(false);
   };
 
+  if(isLoading){
+    return (
+      <SafeAreaView style={styles.loadingScreen}>
+        <ActivityIndicator size="large" color="#FBA834">
+
+        </ActivityIndicator>
+      </SafeAreaView>
+      
+    )}
+
+
   return (
+    
+    
     <View style={styles.container}>
       <View style={styles.header}>
         <Image source={assets.gradient} style={{ zIndex: 1 }} />
@@ -598,5 +620,12 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 62,
     resizeMode: "contain",
+  },
+  loadingScreen:{
+    justifyContent: "center",
+    alignSelf:"center",
+    alignItems: "center",
+    flex: 1,
+
   },
 });

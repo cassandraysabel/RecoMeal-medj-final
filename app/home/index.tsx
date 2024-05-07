@@ -317,7 +317,7 @@ const styles = StyleSheet.create({
   tagContainer: {
     borderColor: "#333A73",
     borderWidth: 5,
-    margin: 10,
+    margin:5,
     borderRadius: 16,
   },
   text: {
@@ -362,16 +362,14 @@ const styles = StyleSheet.create({
   noIngredientsText:{
     marginLeft: 20,
     marginRight: 20,
-    marginTop: 5,
-    marginBottom: 0, 
+    marginTop: 5, 
     fontSize: 15,
     textAlign: "center"
   },
   noingtextContainer:{
-    paddingBottom: 10
   },
   noIngContainer:{
     paddingTop: 70,
-    paddingBottom: 70
+    paddingBottom: 20
   }
 });

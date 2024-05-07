@@ -356,5 +356,6 @@ const styles = StyleSheet.create({
   },
   calendar:{
     width: ScreenWidth,
+    marginTop: -90
   }
 });
