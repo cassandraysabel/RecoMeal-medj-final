@@ -72,12 +72,12 @@ export default function RecipeCard({ recipe }) {
           </Text>
         </View>
         <View
-          style={{ flex: 1, justifyContent: "flex-end", paddingBottom: 10 }}
+          style={{ flex: 1, justifyContent: "flex-end", paddingBottom: 1 }}
         >
           <View
             style={{
               width: 138,
-              height: 19,
+              height: 30,
               backgroundColor: "white",
               flexDirection: "row",
               alignItems: "center",
@@ -88,8 +88,8 @@ export default function RecipeCard({ recipe }) {
           >
             <View
               style={{
-                width: 13,
-                height: 13,
+                width: 20,
+                height: 20,
                 backgroundColor: "#FBA834",
                 borderRadius: 6.6,
                 justifyContent: "center",
@@ -101,7 +101,7 @@ export default function RecipeCard({ recipe }) {
               <TouchableOpacity onPress={AddRecipesToFavorites }>
               <Image
                 source={assets['heart-icon']}
-                style={{ width: 13, height: 10 }}
+                style={{ width: 20, height: 20 }}
               ></Image>
 
               </TouchableOpacity>
@@ -114,8 +114,8 @@ export default function RecipeCard({ recipe }) {
 
             <TouchableOpacity
               style={{
-                width: 53,
-                height: 13,
+                width: 45,
+                height: 20,
                 justifyContent: "center",
                 alignItems: "center",
                 borderRadius: 35,
@@ -124,7 +124,7 @@ export default function RecipeCard({ recipe }) {
               }}
               onPress={() => openRecipeUrl(recipe.recipe.url)}
             >
-              <Text style={{ fontSize: 8, fontWeight: "500", color: "white" }}>
+              <Text style={{ fontSize: 7, fontWeight: "500", color: "white" }}>
                 See More...
               </Text>
             </TouchableOpacity>
