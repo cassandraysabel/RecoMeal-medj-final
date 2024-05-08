@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-export default function CalendarModal({ selectedDate }) {
+export default function CalendarModal({ selectedDate,  }) {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <View
@@ -22,9 +22,9 @@ export default function CalendarModal({ selectedDate }) {
             marginBottom: 10,
             fontWeight: "bold",
           }}
-        >
-          {selectedDate}
+        >{selectedDate}
         </Text>
+
       </View>
     </View>
   );
