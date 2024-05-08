@@ -11,7 +11,7 @@ import {
 import { router } from "expo-router";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../utils/firebase";
-
+import { Link } from "expo-router";
 // Mock function for generating a random verification code
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -33,7 +33,13 @@ export default function ForgotPassword() {
 
       Alert.alert(
         "Code Sent",
-        "A verification code has been sent to your email."
+        "A verification code has been sent to your email.",
+        [
+          {
+            text: "OK",
+            onPress: () => router.replace("auth/login"), // Navigate to login page
+          },
+        ]
       );
     } catch (error) {
       console.error("Error sending verification code:", error);
@@ -71,13 +77,17 @@ export default function ForgotPassword() {
         placeholder="Email"
         keyboardType="email-address"
       />
-      
       <TouchableOpacity style={styles.btn} onPress={handleForgotPassword}>
-        <Text style={styles.btnText}>Send Verification Code</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.link} onPress={navigateToSignUp}>
-        <Text style={styles.linkText}>Create an account</Text>
-      </TouchableOpacity>
+        <Text style={styles.btnText}>Send Verification Link</Text>
+      </TouchableOpacity><View
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+        }}>
+      <Link href={"/auth/login"} style = {styles.link}>
+       <Text>Already have an account? Log In</Text> </Link>
+      </View>
+      
     </View>
   );
 }
@@ -113,7 +123,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#1F1E53",
     borderRadius: 10,
     paddingVertical: 12,
-    paddingHorizontal: 100,
+    paddingHorizontal: 70,
     marginTop: 20,
     marginBottom: 20,
   },
@@ -123,10 +133,6 @@ const styles = StyleSheet.create({
   },
   link: {
     marginTop: 10,
-  },
-  linkText: {
-    color: "#1F1E53",
-    fontSize: 15,
-    textDecorationLine: "underline",
+
   },
 });

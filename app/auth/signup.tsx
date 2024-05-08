@@ -43,14 +43,14 @@ export default function SignUp() {
 
       await createUser(name, email, password);
 
-      setName("")
-      setEmail("")
-      setPassword("")
-      setConfirmPassword("")
+      setName("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
 
-      alert("Account has been made. Please log in.")
+      alert("Account has been made. Please log in.");
 
-      router.replace("auth/login")
+      router.replace("auth/login");
     } catch (err) {
       console.log(err);
     }
@@ -90,52 +90,16 @@ export default function SignUp() {
       />
       <Pressable onPress={createAccount}>
         <View style={styles.btn}>
-          <Text
-            style={{
-              color: "white",
-            }}
-          >
-            Sign Up
-          </Text>
+          <Text style={{color: "white" }}>Sign Up</Text>
         </View>
       </Pressable>
       <View
         style={{
           justifyContent: "center",
           alignItems: "center",
-        }}
-      >
-        <Text>If you have an account already, </Text>
-        <View style={styles.logInButton}>
-          <Link href={"/auth/login"}>
-            <Text
-              style={{
-                color: "white",
-              }}
-            >
-              Log In
-            </Text>
-          </Link>
-        </View>
-      </View>
-
-      <Text>Or continue with</Text>
-      <View style={styles.iconContainer}>
-        <TouchableOpacity key="fb" style={styles.iconWrapper}>
-          <Image style={styles.icon} source={require("../../assets/fb.png")} />
-        </TouchableOpacity>
-        <TouchableOpacity key="google" style={styles.iconWrapper}>
-          <Image
-            style={styles.icon}
-            source={require("../../assets/google.png")}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity key="apple" style={styles.iconWrapper}>
-          <Image
-            style={styles.icon}
-            source={require("../../assets/apple-logo.png")}
-          />
-        </TouchableOpacity>
+        }}>
+      <Link href={"/auth/login"} style = {styles.desclogin}>
+       <Text>Already have an account? Log In </Text> </Link>
       </View>
     </View>
   );
@@ -150,7 +114,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   title: {
-    marginTop: 100,
+    marginTop: 150,
     fontSize: 35,
     marginBottom: 10,
     color: "#1F1E53",
@@ -158,6 +122,9 @@ const styles = StyleSheet.create({
   desc: {
     marginBottom: 40,
     fontSize: 15,
+  },
+  desclogin: {
+    marginTop: 20
   },
   input: {
     width: "80%",
@@ -177,40 +144,10 @@ const styles = StyleSheet.create({
   btn: {
     backgroundColor: "#1F1E53",
     borderRadius: 10,
-    height: 50,
+    height: 45,
     width: 200,
     justifyContent: "center",
     alignItems: "center",
     marginVertical: 10,
-  },
-  logInButton: {
-    backgroundColor: "#1F1E53",
-    borderRadius: 10,
-    justifyContent: "center",
-    alignItems: "center",
-    marginVertical: 10,
-    height: 30,
-    width: 100,
-    alignSelf: "center",
-  },
-  logInText: {
-    fontSize: 18,
-    color: "blue",
-    textDecorationLine: "underline",
-  },
-  iconContainer: {
-    flexDirection: "row",
-    marginTop: 10,
-  },
-  iconWrapper: {
-    backgroundColor: "#ECECEC",
-    padding: 10,
-    paddingHorizontal: 20,
-    borderRadius: 10,
-    marginHorizontal: 5,
-  },
-  icon: {
-    width: 30,
-    height: 30,
   },
 });

@@ -15,45 +15,62 @@ export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [usernameFocused, setUsernameFocused] = useState(false);
-  const [passwordFocused, setPasswordFocused] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
 
   useEffect(() => {
-    if (user != null) router.replace("/home")
-  }, [])
-  
+    if (user != null) router.replace("/home");
+  }, []);
+
   const logIn = async () => {
     try {
+      setEmailError(false);
+      setPasswordError(false);
+
       if (!email || !password) {
         alert("Please fill all the fields");
+        return;
       }
+
+      // Email format validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        setEmailError(true);
+        return;
+      }
+
       await signIn(email, password).then(() => {
         router.replace("/home");
       });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+        setEmailError(true);
+        setPasswordError(true)
+    
     }
   };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Sign in Here</Text>
       <Text style={styles.desc}>Welcome back, you've been missed!</Text>
       <TextInput
-        style={[styles.input, usernameFocused && styles.inputFocused]}
+        style={[styles.input, emailError && styles.inputError]}
         value={email}
-        onChangeText={setEmail}
+        onChangeText={(text) => {
+          setEmail(text);
+          setEmailError(false); // Clear error when user types
+        }}
         placeholder="Email"
-        onFocus={() => setUsernameFocused(true)}
-        onBlur={() => setUsernameFocused(false)}
       />
       <TextInput
-        style={[styles.input, passwordFocused && styles.inputFocused]}
+        style={[styles.input, passwordError && styles.inputError]}
         value={password}
-        onChangeText={setPassword}
+        onChangeText={(text) => {
+          setPassword(text);
+          setPasswordError(false); // Clear error when user types
+        }}
         placeholder="Password"
         secureTextEntry
-        onFocus={() => setPasswordFocused(true)}
-        onBlur={() => setPasswordFocused(false)}
       />
 
       <TouchableOpacity
@@ -73,25 +90,6 @@ export default function Login() {
           <Text style={styles.cnabtn}>Don't have an account yet? Sign Up</Text>
         </Link>
       </View>
-
-      <Text style={styles.orwText}>Or continue with</Text>
-      <View style={styles.iconContainer}>
-        <TouchableOpacity style={styles.iconWrapper}>
-          <Image style={styles.icon} source={require("../../assets/fb.png")} />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.iconWrapper}>
-          <Image
-            style={styles.icon}
-            source={require("../../assets/google.png")}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.iconWrapper}>
-          <Image
-            style={styles.icon}
-            source={require("../../assets/apple-logo.png")}
-          />
-        </TouchableOpacity>
-      </View>
     </View>
   );
 }
@@ -100,7 +98,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    marginTop: 50,
+    marginTop: 80,
     width: "100%",
     height: "100%",
   },
@@ -112,22 +110,22 @@ const styles = StyleSheet.create({
   },
   desc: {
     fontSize: 15,
-    marginBottom: 50,
+    marginBottom: 40,
   },
   input: {
     width: "80%",
     padding: 10,
     paddingVertical: 15,
     backgroundColor: "#F1F4FF",
-    marginBottom: 10,
+    marginBottom: 5,
     borderRadius: 10,
     color: "#626262",
     borderWidth: 1,
     borderColor: "#cccccc",
+    marginTop: 10,
   },
-  inputFocused: {
-    borderWidth: 2,
-    borderColor: "#1F1E53",
+  inputError: {
+    borderColor: "red",
   },
   btn: {
     backgroundColor: "#1F1E53",
