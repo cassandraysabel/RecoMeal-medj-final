@@ -126,19 +126,20 @@ export default function CalendarPage() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.overlay}>
-        <Image source={assets["ingredients-bg"]} style={styles.bgimage} />
+      <View style={styles.header}>
+        <Image source={assets.gradient} style={{ zIndex: 1 }} />
         <Image
-          source={assets.gradient}
-          style={[styles.gradientimage, { zIndex: 1 }]}
+          source={assets["ingredients-bg"]}
+          resizeMode="cover"
+          style={styles.bgimage}
         />
-        <Text style={[styles.ingredientsText, { zIndex: 2 }]}>Calendar</Text>
+        <Text style={styles.ingredientsText}>Calendar</Text>
       </View>
       <View style={{ flex: 1, top: 100 }}>
         <Calendar
           markedDates={markedDates}
           onDayPress={handleDayPress}
-          style={[{ width: ScreenWidth }]}
+          style={styles.calendar}
         />
         <Modal
           animationType="slide"
@@ -177,7 +178,40 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     // justifyContent: "flex-start",
-    paddingHorizontal: 20,
+    // paddingHorizontal: 20,
+  },
+  header: {
+    width: "100%",
+    position: "relative",
+  },
+  bgimage: {
+    position: "absolute",
+    left: 0,
+    bottom: 0,
+    width: 300,
+    height: 100,
+  },
+  ingredientsText: {
+    color: "#333A73",
+    fontSize: 30,
+    fontWeight: "bold",
+    position: "absolute",
+    right: 10,
+    top: 40,
+    zIndex: 1
+  },
+  overlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    justifyContent: "flex-start",
+    alignItems: "flex-end",
+  },
+  gradientimage: {
+    width: "100%",
+    height: "12%",
   },
   input: {
     flex: 1,
@@ -232,8 +266,6 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
 
-  deleteposition: {},
-
   image: {
     width: 59,
     height: 55,
@@ -283,38 +315,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
 
-  bgimage: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "50%",
-    height: "12%",
-  },
-
-  gradientimage: {
-    width: "100%",
-    height: "12%",
-  },
-
-  ingredientsText: {
-    color: "#333A73",
-    fontSize: 30,
-    fontWeight: "bold",
-    opacity: 1,
-    position: "absolute",
-    top: 40,
-    right: 15,
-  },
-
-  overlay: {
-    position: "absolute",
-    // top: 0,
-    // left: 0,
-    width: ScreenWidth,
-    height: "100%",
-    justifyContent: "flex-start",
-    alignItems: "flex-end",
-  },
 
   content: {
     flex: 1,
@@ -354,4 +354,8 @@ const styles = StyleSheet.create({
     height: 62,
     resizeMode: "contain",
   },
+  calendar:{
+    width: ScreenWidth,
+    marginTop: -90
+  }
 });

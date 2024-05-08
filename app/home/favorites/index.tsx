@@ -15,6 +15,8 @@ import { Link } from "expo-router";
 import { assets } from "../../../components/assets";
 import favoriteRecipes from "../../../components/RecipeCard"; // Assuming this imports recipe data
 import { useDataContext } from "../../../utils/UserData";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 
 export default function FavoritesScreen() {
   // const [favorites, setFavorites] = useState(favoriteRecipes);
@@ -29,6 +31,16 @@ export default function FavoritesScreen() {
 
   const FavoritesScreen = () => (
     <View style={{ flex: 1 }}>
+        {
+          (favoriteRecipes.length === 0) ?
+          <View style={styles.nofavescontainer}>
+            <MaterialCommunityIcons name="notebook-outline" size={70} color="#5F648B" style={styles.nofaves} />
+            <View style={styles.nofavetextcontainer}>
+            <Text style={styles.nofavetext}> You have no favorites yet.</Text>
+            <Text style={styles.nofavetext}> Try using a recipe to see if you'll like it.</Text>
+            </View>
+          </View> : <View />
+        }
       <FlatList
         data={favoriteRecipes}
         keyExtractor={(item) => item.id || Math.random().toString()} // Ensure unique key
@@ -73,7 +85,7 @@ export default function FavoritesScreen() {
                 <Text style={{ fontSize: 10, fontWeight: "bold" }}>
                   Ingredients:
                 </Text>
-                <ScrollView style={{ flex: 1, maxWidth: 250}}>
+                <ScrollView style={{ flex: 1, maxWidth: 250, marginBottom: 10, paddingTop: 5}}>
                   <View>
                     {item.recipe &&
                       item.recipe.ingredients.map((ingredient, index) => (
@@ -223,4 +235,24 @@ const styles = StyleSheet.create({
     borderRadius:50,
     
   },
+  nofaveicon:{
+    marginTop: 80,
+    marginBottom: 5,
+    alignSelf: "center",
+  },
+  nofaves:{
+    paddingTop: 100,
+    paddingBottom: 10,
+    alignSelf: "center"
+  },
+  nofavetext:{
+    paddingBottom: 10,
+    textAlign:"center"
+  },
+  nofavetextcontainer:{
+    justifyContent:"center"
+  },
+  nofavescontainer:{
+    paddingTop: 150
+  }
 });
