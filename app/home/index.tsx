@@ -18,12 +18,74 @@ import { useDataContext } from "../../utils/UserData";
 import { Link, router } from "expo-router";
 import { useAuth } from "../../utils/Auth";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import RecipeCard from "../../components/RecipeCard";
+import { Linking } from 'react-native';
 
 const ScreenWidth = Dimensions.get("window").width;
 
 export default function HomePage() {
   const { createdIngredients } = useDataContext();
   const [activeTags, setActiveTags] = useState([]);
+
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+
+    const FilteredRecipeList = ({ recipes }) => {
+    return (
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+        {recipes ? (
+          recipes.map((recipe) => (
+            <RecipeCard key={recipe.recipe.label} recipe={recipe} />
+          ))
+        ) : (
+          <Text>No recipes available for this category</Text>
+        )}
+      </ScrollView>
+    );
+  };
+
+
+  const categories = [
+    { name:'Sweet', keywords: ['sugar', 'chocolate']},
+    { name: 'Spicy', keywords: ['chili', 'pepper']},
+    { name: 'Noodle', keywords: ['noodles', 'pasta']}
+
+  ];
+
+  const filterRecipesByCategory = (recipes, category) => {
+    if (!category) return recipes; // If no category is selected, return all recipes
+    const categoryKeywords = categories.find(cat => cat.name === category)?.keywords || [];
+    return recipes.filter(recipe => {
+      // Check if any ingredient of the recipe contains the category keyword
+      return recipe.recipe.ingredients.some(ingredient => {
+        return categoryKeywords.some(keyword => ingredient.text.toLowerCase().includes(keyword));
+      });
+    });
+  };
+
+  const filteredRecipes = filterRecipesByCategory(recipes, selectedCategory);
+
+  const toggleCategoryFilter = (category) => {
+    setSelectedCategory(selectedCategory === category ? null : category); // Toggle the selected category
+  };
+
+
+
+  // const toggleCategoryFilter = (category) => {
+  //   if (selectedCategory === category) {
+  //     setSelectedCategory(null); // If the same category is already selected, clear the filter
+  //   } else {
+  //     setSelectedCategory(category); // Otherwise, set the selected category
+  //   }
+  // };
+
+
+  
+  const openRecipeUrl = (url) => {
+    Linking.openURL(url);
+  };
+
+
 
   const handleTagPress = (tag) => {
     // Check if the tag is already active
@@ -45,6 +107,8 @@ export default function HomePage() {
     console.log("logged in! ", user?.displayName);
     if (!user) router.replace("auth/login");
   });
+
+
 
   return (
     <View style={styles.container}>
@@ -149,9 +213,9 @@ export default function HomePage() {
                 return <View />;
               }
               return (
-                <RecipeList 
+                <RecipeList
                 key = {index}
-                  ingredient={ingredient.name}
+                ingredient={ingredient}
                   recipes={ingredient.recipes}
                 />
               );
@@ -199,7 +263,9 @@ export default function HomePage() {
                     styles.button,
                     activeTags.includes("spicy") && styles.activeButton,
                   ]}
-                  onPress={() => handleTagPress("spicy")}
+                  onPress={() => {
+                    toggleCategoryFilter('Spicy')
+                  }}
                 >
                   <Text
                     style={[
@@ -215,7 +281,9 @@ export default function HomePage() {
                     styles.button,
                     activeTags.includes("noodles") && styles.activeButton,
                   ]}
-                  onPress={() => handleTagPress("noodles")}
+                  onPress={() => {
+                    toggleCategoryFilter('Noodles')
+                  }}
                 >
                   <Text
                     style={[
@@ -247,7 +315,7 @@ export default function HomePage() {
                     styles.button,
                     activeTags.includes("dessert") && styles.activeButton,
                   ]}
-                  onPress={() => handleTagPress("dessert")}
+                  onPress={() => toggleCategoryFilter('Sweet')}
                 >
                   <Text
                     style={[
