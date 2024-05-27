@@ -8,16 +8,14 @@ const SplashScreen = () => {
   useEffect(() => {
     if (middleGifVisible) {
       const timer = setTimeout(() => {
-        // After 3 seconds, navigate to the next page
         router.replace('auth/login');
-      }, 3000);
+      }, 3000); //call back is to direct the page to login page and delay is three seconds
 
-      return () => clearTimeout(timer);
+      return () => clearTimeout(timer); // this just cancels the timer
     }
   }, [middleGifVisible]);
 
   const handlePress = () => {
-    // Show the GIF when user clicks anywhere on the screen
     setGifVisible(true);
     setMiddleGifVisible(true);
   };
@@ -25,7 +23,6 @@ const SplashScreen = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.fullScreenTouchable} onPress={handlePress}>
-        {/* This view covers the whole screen and triggers the GIF visibility */}
         {gifVisible && (
           <View style={styles.gifContainer}>
        

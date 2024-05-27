@@ -71,16 +71,19 @@ export default function Ingredients() {
     setSelectedDateIngredients(ingredientsForSelectedDate);
   };
 
-  const handleDelete = (index, name) => {
-    const deletedIngredient = createdIngredients[index];
+  const handleDelete = (id) => {
+    const deletedIngredient = createdIngredients.filter((ingredient)=>ingredient.id === id)[0]
+
+    console.log(deletedIngredient)
 
     if (!deletedIngredient) {
-      console.error("Cannot delete ingredient at index:", index);
+      console.error("Cannot delete ingredient at index:", id);
       return;
     }
     const newIngredients = createdIngredients.filter(
-      (ingredient, i) => i !== index
+      (ingredient) => ingredient.id !== id
     );
+
     setCreatedIngredients(newIngredients);
 
     const updatedMarkedDates = { ...markedDates };
@@ -89,7 +92,6 @@ export default function Ingredients() {
   };
 
   const sortByExpirationDate = (a, b) => {
-    // Convert expiration dates to Date objects
     const dateA = new Date(a.expirationDate).getTime();
     const dateB = new Date(b.expirationDate).getTime();
 
@@ -156,7 +158,11 @@ export default function Ingredients() {
               (1000 * 60 * 60 * 24)
           );
 
+          console.log(sortedIngredients.length)
+          console.log(createdIngredients.length)
+
           const newIngredient = {
+            id: `${String(createdIngredients.length)}${ingredient.food.label}`,
             name: ingredient.food.label,
             image: ingredient.food.image,
             expirationDate: expirationDate,
@@ -164,6 +170,8 @@ export default function Ingredients() {
             daysUntilExpiration: daysRemaining,
             recipes: [],
           };
+
+          console.log(newIngredient.id)
 
           const existingRecipe = createdIngredients.find(
             (ingredient) => ingredient.name === newIngredient.name
@@ -229,15 +237,15 @@ export default function Ingredients() {
         </TouchableOpacity>
         <ScrollView style={styles.scrollContainer}>
           {sortedIngredients.map(
-            ({ name, image, daysUntilExpiration }, index) => (
+            ({ id, name, image, daysUntilExpiration }) => (
               <Swipeable
-                key={index}
+                key={id}
                 friction={2}
                 rightThreshold={70}
                 renderRightActions={() => (
                   <Pressable
                     onPress={() => {
-                      handleDelete(index, name);
+                      handleDelete(id);
                     }}
                     style={{
                       width: 70,
@@ -252,7 +260,7 @@ export default function Ingredients() {
                 )}
               >
                 <View
-                  key={index}
+                  key={id}
                   style={[
                     styles.rectangle,
                     (daysUntilExpiration === 2 ||

@@ -158,9 +158,9 @@ export default function HomePage() {
             })}
 
             {/* Tags */}
-            <View style={styles.tagContainer}>
-              <View style={styles.text}>
-                <Text
+            {/* <View style={styles.tagContainer}> */}
+              {/* <View style={styles.text}> */}
+                {/* <Text
                   style={{ color: "#333A73", fontSize: 24, fontWeight: "bold" }}
                 >
                   What are you in the{" "}
@@ -175,10 +175,10 @@ export default function HomePage() {
                 >
                   {" "}
                   for?
-                </Text>
-              </View>
-              <View style={styles.container}>
-                <TouchableOpacity
+                </Text> */}
+              {/* </View> */}
+              {/* <View style={styles.container}> */}
+                {/* <TouchableOpacity
                   style={[
                     styles.button,
                     activeTags.includes("meal") && styles.activeButton,
@@ -257,9 +257,9 @@ export default function HomePage() {
                   >
                     dessert
                   </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
+                </TouchableOpacity> */}
+              {/* </View> */}
+            {/* </View> */}
             <Text
               style={{
                 color: "#333A73",
