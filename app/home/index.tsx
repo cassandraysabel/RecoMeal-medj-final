@@ -63,8 +63,6 @@ export default function HomePage() {
     });
   };
 
-  const filteredRecipes = filterRecipesByCategory(recipes, selectedCategory);
-
   const toggleCategoryFilter = (category) => {
     setSelectedCategory(selectedCategory === category ? null : category); // Toggle the selected category
   };

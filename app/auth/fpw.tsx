@@ -26,9 +26,7 @@ export default function ForgotPassword() {
     }
 
     try {
-      await sendPasswordResetEmail(auth, email).then(() => {
-        console.log("HELLO ASHDJAHSKDHAKHDALJSLDASLD");
-      });
+      await sendPasswordResetEmail(auth, email)
       setIsCodeSent(true);
 
       Alert.alert(

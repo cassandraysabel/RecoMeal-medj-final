@@ -199,7 +199,7 @@ export default function Ingredients() {
     setisLoading(false);
   };
 
-  if(isLoading){
+  if(isLoading){  
     return (
       <SafeAreaView style={styles.loadingScreen}>
         <ActivityIndicator size="large" color="#FBA834">

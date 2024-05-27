@@ -26,7 +26,6 @@ export default function RecipeCard({ recipe }) {
     console.log(recipe)
     const updatedFavorites = [...favoriteRecipes, recipe];
     setFavoriteRecipes(updatedFavorites);
-    //console.log("Updated favorite recipes:", updatedFavorites); 
   }
 
 
