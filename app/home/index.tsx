@@ -41,66 +41,66 @@ export default function HomePage() {
   };
 
 
-  const categories = [
-    { name:'Sweet', keywords: ['sugar', 'chocolate']},
-    { name: 'Spicy', keywords: ['chili', 'pepper']},
-    { name: 'Noodle', keywords: ['noodles', 'pasta']}
+  // const categories = [
+  //   { name:'Sweet', keywords: ['sugar', 'chocolate']},
+  //   { name: 'Spicy', keywords: ['chili', 'pepper']},
+  //   { name: 'Noodle', keywords: ['noodles', 'pasta']}
 
-  ];
+  // ];
 
-  const filterRecipesByCategory = (recipes, category) => {
-    if (!category) return recipes; // If no category is selected, return all recipes
-    const categoryKeywords = categories.find(cat => cat.name === category)?.keywords || [];
-    return recipes.filter(recipe => {
-      // Check if any ingredient of the recipe contains the category keyword
-      return recipe.recipe.ingredients.some(ingredient => {
-        return categoryKeywords.some(keyword => ingredient.text.toLowerCase().includes(keyword));
-      });
-    });
-  };
-
-  const toggleCategoryFilter = (category) => {
-    setSelectedCategory(selectedCategory === category ? null : category); // Toggle the selected category
-  };
-
-
+  // const filterRecipesByCategory = (recipes, category) => {
+  //   if (!category) return recipes; // If no category is selected, return all recipes
+  //   const categoryKeywords = categories.find(cat => cat.name === category)?.keywords || [];
+  //   return recipes.filter(recipe => {
+  //     // Check if any ingredient of the recipe contains the category keyword
+  //     return recipe.recipe.ingredients.some(ingredient => {
+  //       return categoryKeywords.some(keyword => ingredient.text.toLowerCase().includes(keyword));
+  //     });
+  //   });
+  // };
 
   // const toggleCategoryFilter = (category) => {
-  //   if (selectedCategory === category) {
-  //     setSelectedCategory(null); // If the same category is already selected, clear the filter
-  //   } else {
-  //     setSelectedCategory(category); // Otherwise, set the selected category
-  //   }
+  //   setSelectedCategory(selectedCategory === category ? null : category); // Toggle the selected category
   // };
 
 
+
+  // // const toggleCategoryFilter = (category) => {
+  // //   if (selectedCategory === category) {
+  // //     setSelectedCategory(null); // If the same category is already selected, clear the filter
+  // //   } else {
+  // //     setSelectedCategory(category); // Otherwise, set the selected category
+  // //   }
+  // // };
+
+
   
-  const openRecipeUrl = (url) => {
-    Linking.openURL(url);
-  };
+  // const openRecipeUrl = (url) => {
+  //   Linking.openURL(url);
+  // };
 
 
 
-  const handleTagPress = (tag) => {
-    // Check if the tag is already active
-    const index = activeTags.indexOf(tag);
-    if (index !== -1) {
-      // Tag is active, remove it
-      setActiveTags(activeTags.filter((item) => item !== tag));
-      console.log(`Tag '${tag}' deactivated`);
-    } else {
-      // Tag is not active, add it
-      setActiveTags([...activeTags, tag]);
-      console.log(`Tag '${tag}' activated`);
-    }
-  };
+  // const handleTagPress = (tag) => {
+  //   // Check if the tag is already active
+  //   const index = activeTags.indexOf(tag);
+  //   if (index !== -1) {
+  //     // Tag is active, remove it
+  //     setActiveTags(activeTags.filter((item) => item !== tag));
+  //     console.log(`Tag '${tag}' deactivated`);
+  //   } else {
+  //     // Tag is not active, add it
+  //     setActiveTags([...activeTags, tag]);
+  //     console.log(`Tag '${tag}' activated`);
+  //   }
+  // };
 
-  const { user } = useAuth();
+  // const { user } = useAuth();
 
-  useEffect(() => {
-    console.log("logged in! ", user?.displayName);
-    if (!user) router.replace("auth/login");
-  });
+  // useEffect(() => {
+  //   console.log("logged in! ", user?.displayName);
+  //   if (!user) router.replace("auth/login");
+  // });
 
 
 

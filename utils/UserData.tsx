@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { Text } from "react-native";
 
 interface iUserData {
   isPremium: boolean;
@@ -52,8 +51,8 @@ const RecipeProvider = ({ children }) => {
     setIsPremium,
     favoriteRecipes,
     setFavoriteRecipes,
-   createdIngredients,
-   setCreatedIngredients,
+    createdIngredients,
+    setCreatedIngredients,
     recommendedFavorites,
     setRecommendedFavorites,
   };
