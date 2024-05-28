@@ -3,10 +3,13 @@ import React from "react";
 import RecipeCard from "./RecipeCard";
 
 export default function RecipeList({ recipes, ingredient }) {
+  
+  console.log(recipes)
+  
   return (
     <View >
       <View style={{height: 28, paddingLeft: 20, marginBottom: 2, marginTop: 9}}>
-       <Text style={{fontSize: 20, color: '#FBA834' }}>{ingredient}</Text>
+       <Text style={{fontSize: 20, color: '#FBA834' }}>{ingredient.name}</Text>
         
 
       </View>

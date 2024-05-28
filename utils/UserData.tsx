@@ -32,6 +32,7 @@ export const useDataContext = () => {
 };
 
 type ingredient =  {
+  id:string,
   name: string,
   image: string,
   expirationDate: string,
