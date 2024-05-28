@@ -30,6 +30,7 @@ export default function Ingredients() {
   const [purchaseDate, setPurchaseDate] = useState(moment().format("YYYY-MM-DD"));
   const [expirationDate, setExpirationDate] = useState("");
   const [daysUntilExpiration, setDaysUntilExpiration] = useState("");
+  
 
   const [markedDates, setmarkedDates] = useState({});
   const [selectedDateIngredients, setSelectedDateIngredients] = useState([]);
@@ -37,6 +38,8 @@ export default function Ingredients() {
   const [isExpiryDateVisible, setIsExpiryDateVisible] = useState(false);
   const [isPurchaseDateVisible, setIsPurchaseDateVisible] = useState(false);
   const [isLoading, setisLoading] = useState(false)
+
+  
 
   const handleInputChange = (text) => {
     setIngredientName(text);
@@ -177,6 +180,8 @@ export default function Ingredients() {
             (ingredient) => ingredient.name === newIngredient.name
           );
 
+    
+
           if (!existingRecipe) {
             const fetchedRecipes = await fetchRecipes(ingredientName);
             newIngredient.recipes = fetchedRecipes;
@@ -209,6 +214,12 @@ export default function Ingredients() {
       
     )}
 
+  const expiryIndicator = (days) => {
+    if (days === 1){
+      return "Today"
+    } else {return days
+    
+  }}
 
   return (
     
@@ -276,7 +287,7 @@ export default function Ingredients() {
                     <View style={styles.textposition}>
                       <Text style={styles.displayText}>{name}</Text>
                       <Text style={styles.resultText}>
-                        Will expire on: {daysUntilExpiration} day(s)
+                        Will expire on: {expiryIndicator(daysUntilExpiration)} day(s)
                       </Text>
                     </View>
                   </View>
