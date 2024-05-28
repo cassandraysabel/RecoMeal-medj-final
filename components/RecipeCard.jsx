@@ -22,8 +22,6 @@ export default function RecipeCard({ recipe }) {
       console.log("Recipe already exists in favorites.");
       return;
     }
-
-    console.log(recipe)
     const updatedFavorites = [...favoriteRecipes, recipe];
     setFavoriteRecipes(updatedFavorites);
   }
