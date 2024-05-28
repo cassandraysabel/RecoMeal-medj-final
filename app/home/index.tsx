@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 import {
-  Button,
   Dimensions,
   Image,
-  Pressable,
   StyleSheet,
   Text,
   ScrollView,
   View,
-  TouchableOpacity,
-  FlatList,
   SafeAreaView,
 } from "react-native";
 import { assets } from "../../components/assets";

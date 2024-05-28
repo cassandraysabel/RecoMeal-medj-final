@@ -5,7 +5,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ViewBase,
   ScrollView,
   TouchableOpacity,
 } from "react-native";

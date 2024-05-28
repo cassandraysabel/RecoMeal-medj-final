@@ -11,9 +11,7 @@ import {
   Linking,
   SafeAreaView
 } from "react-native";
-import { Link } from "expo-router";
 import { assets } from "../../../components/assets";
-import favoriteRecipes from "../../../components/RecipeCard"; // Assuming this imports recipe data
 import { useDataContext } from "../../../utils/UserData";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
