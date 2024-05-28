@@ -1,8 +1,7 @@
-import { StyleSheet, Text, View } from "react-native";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { onAuthStateChanged, signInWithEmailAndPassword, User } from "firebase/auth";
 import { auth } from "./firebase";
-import { getData, setData } from "./asyncstorage";
+import { setData } from "./asyncstorage";
 // import { onAuthStateChanged, User } from 'firebase/auth'
 // import { auth } from './firebase'
 

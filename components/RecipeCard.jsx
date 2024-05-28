@@ -1,9 +1,7 @@
 import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, {useEffect, useState} from 'react'
 import { assets } from './assets';
-import { ScrollView } from 'react-native';
 import { useDataContext } from '../utils/UserData';
-import FavoritesScreen from '../app/home/favorites';
 
 
 export default function RecipeCard({ recipe }) {
