@@ -73,25 +73,6 @@ export default function Login() {
           <Text style={styles.cnabtn}>Don't have an account yet? Sign Up</Text>
         </Link>
       </View>
-
-      <Text style={styles.orwText}>Or continue with</Text>
-      <View style={styles.iconContainer}>
-        <TouchableOpacity style={styles.iconWrapper}>
-          <Image style={styles.icon} source={require("../../assets/fb.png")} />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.iconWrapper}>
-          <Image
-            style={styles.icon}
-            source={require("../../assets/google.png")}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.iconWrapper}>
-          <Image
-            style={styles.icon}
-            source={require("../../assets/apple-logo.png")}
-          />
-        </TouchableOpacity>
-      </View>
     </View>
   );
 }
