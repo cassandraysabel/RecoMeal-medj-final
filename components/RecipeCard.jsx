@@ -2,6 +2,7 @@ import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-
 import React, {useEffect, useState} from 'react'
 import { assets } from './assets';
 import { useDataContext } from '../utils/UserData';
+import { setData } from '../utils/asyncstorage';
 
 
 export default function RecipeCard({ recipe }) {
@@ -22,9 +23,10 @@ export default function RecipeCard({ recipe }) {
     }
     const updatedFavorites = [...favoriteRecipes, recipe];
     setFavoriteRecipes(updatedFavorites);
-  }
-
-
+    setData("favoriteRecipes", updatedFavorites);
+  };
+  
+  
   return (
     <View>
       <View

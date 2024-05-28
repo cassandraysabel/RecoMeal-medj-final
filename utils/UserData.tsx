@@ -80,14 +80,6 @@ const RecipeProvider = ({ children }) => {
     setIngredients();
   }, [createdIngredients]);
 
-  useEffect(() => {
-    const setFavorites = async () => {
-      console.log(favoriteRecipes.length);
-      await setData("favoriteRecipes", favoriteRecipes);
-    };
-
-    setFavorites();
-  }, [favoriteRecipes]);
 
   return (
     <UserDataContext.Provider value={value}>

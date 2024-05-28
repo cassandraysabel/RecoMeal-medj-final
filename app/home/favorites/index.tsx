@@ -14,6 +14,7 @@ import {
 import { assets } from "../../../components/assets";
 import { useDataContext } from "../../../utils/UserData";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { setData } from "../../../utils/asyncstorage";
 
 
 export default function FavoritesScreen() {
@@ -25,6 +26,7 @@ export default function FavoritesScreen() {
     );
 
     setFavoriteRecipes(updatedFavorites);
+    setData("favoriteRecipes", updatedFavorites);
   };
 
   const FavoritesScreen = () => (

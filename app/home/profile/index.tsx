@@ -37,22 +37,13 @@ export default function Profile() {
           <Text style={styles.infoLabel}>Subscription</Text>
           <Text style={styles.infoValue}>Standard Plan</Text>
         </View>
-        {/* Upgrade Button */}
+
         <Pressable style={styles.upgradeButton}>
           <Text style={styles.upgradeButtonText}>Subscribe to Premium</Text>
         </Pressable>
       </View>
 
-      {/* Notifications Section */}
-      <View style={styles.notificationContainer}>
-        <Text style={styles.title}>Notifications</Text>
-        <View style={styles.infoRow}>
-          <Text style={styles.infoLabel}>Push Notification</Text>
-          <Text style={styles.infoSwitchText}>ON</Text>
-        </View>
-      </View>
-
-      {/* Log Out Button */}
+      
       <TouchableOpacity style={styles.logoutButton} onPress={logOut}>
         <Text style={styles.logoutText}>Log Out</Text>
       </TouchableOpacity>
