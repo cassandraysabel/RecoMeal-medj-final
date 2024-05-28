@@ -12,10 +12,8 @@ import { assets } from "../../components/assets";
 import RecipeList from "../../components/RecipeList";
 import { useDataContext } from "../../utils/UserData";
 import { Link, router } from "expo-router";
-import { useAuth } from "../../utils/Auth";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import RecipeCard from "../../components/RecipeCard";
-import { Linking } from 'react-native';
 
 const ScreenWidth = Dimensions.get("window").width;
 
