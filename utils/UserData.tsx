@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { setData, getData } from "./asyncstorage";
 
 interface iUserData {
   isPremium: boolean;
@@ -17,7 +19,7 @@ export const UserDataContext = createContext<iUserData>({
   createdIngredients: [],
   setCreatedIngredients: () => {},
   favoriteRecipes: [],
-  setFavoriteRecipes:  () => {},
+  setFavoriteRecipes: () => {},
   recommendedFavorites: [],
   setRecommendedFavorites: () => {},
 });
@@ -30,19 +32,21 @@ export const useDataContext = () => {
   return context;
 };
 
-type ingredient =  {
-  id:string,
-  name: string,
-  image: string,
-  expirationDate: string,
-  purchaseDate: string,
-  daysUntilExpiration: number,
-  recipes : []
-}
+type ingredient = {
+  id: string;
+  name: string;
+  image: string;
+  expirationDate: string;
+  purchaseDate: string;
+  daysUntilExpiration: number;
+  recipes: [];
+};
 
 const RecipeProvider = ({ children }) => {
   const [isPremium, setIsPremium] = useState(false);
-  const [createdIngredients, setCreatedIngredients] = useState<ingredient[]>([]);
+  const [createdIngredients, setCreatedIngredients] = useState<ingredient[]>(
+    []
+  );
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [recommendedFavorites, setRecommendedFavorites] = useState([]);
 
@@ -56,6 +60,26 @@ const RecipeProvider = ({ children }) => {
     recommendedFavorites,
     setRecommendedFavorites,
   };
+
+  useEffect(() => {
+    const getAllData = async () => {
+      const storageIngredients = await getData("createdIngredients");
+      const storageFavorites = await getData("favoriteRecipes");
+      setFavoriteRecipes(storageFavorites);
+      setCreatedIngredients(storageIngredients);
+    };
+
+    getAllData();
+  }, []);
+
+  useEffect(() => {
+    const setIngredients = async () => {
+      await setData("createdIngredients", createdIngredients);
+      await setData("favoriteRecipes", favoriteRecipes);
+    };
+    setIngredients();
+  }, [createdIngredients]);
+
 
   return (
     <UserDataContext.Provider value={value}>

@@ -41,9 +41,7 @@ export default function ForgotPassword() {
   };
 
   const handleVerifyCode = () => {
-    // Check if the entered code matches the sent code
     if (verificationCode === enteredCode) {
-      // Code matches, navigate to reset password screen
     } else {
       Alert.alert(
         "Invalid Code",
@@ -53,7 +51,7 @@ export default function ForgotPassword() {
   };
 
   const navigateToSignUp = () => {
-    router.replace("auth/signup"); // Navigate to SignUpScreen
+    router.replace("auth/signup");
   };
 
   return (

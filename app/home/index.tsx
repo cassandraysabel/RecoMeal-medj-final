@@ -19,88 +19,6 @@ const ScreenWidth = Dimensions.get("window").width;
 
 export default function HomePage() {
   const { createdIngredients } = useDataContext();
-  const [activeTags, setActiveTags] = useState([]);
-
-  const [selectedCategory, setSelectedCategory] = useState(null);
-
-
-    const FilteredRecipeList = ({ recipes }) => {
-    return (
-      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        {recipes ? (
-          recipes.map((recipe) => (
-            <RecipeCard key={recipe.recipe.label} recipe={recipe} />
-          ))
-        ) : (
-          <Text>No recipes available for this category</Text>
-        )}
-      </ScrollView>
-    );
-  };
-
-
-  // const categories = [
-  //   { name:'Sweet', keywords: ['sugar', 'chocolate']},
-  //   { name: 'Spicy', keywords: ['chili', 'pepper']},
-  //   { name: 'Noodle', keywords: ['noodles', 'pasta']}
-
-  // ];
-
-  // const filterRecipesByCategory = (recipes, category) => {
-  //   if (!category) return recipes; // If no category is selected, return all recipes
-  //   const categoryKeywords = categories.find(cat => cat.name === category)?.keywords || [];
-  //   return recipes.filter(recipe => {
-  //     // Check if any ingredient of the recipe contains the category keyword
-  //     return recipe.recipe.ingredients.some(ingredient => {
-  //       return categoryKeywords.some(keyword => ingredient.text.toLowerCase().includes(keyword));
-  //     });
-  //   });
-  // };
-
-  // const toggleCategoryFilter = (category) => {
-  //   setSelectedCategory(selectedCategory === category ? null : category); // Toggle the selected category
-  // };
-
-
-
-  // // const toggleCategoryFilter = (category) => {
-  // //   if (selectedCategory === category) {
-  // //     setSelectedCategory(null); // If the same category is already selected, clear the filter
-  // //   } else {
-  // //     setSelectedCategory(category); // Otherwise, set the selected category
-  // //   }
-  // // };
-
-
-  
-  // const openRecipeUrl = (url) => {
-  //   Linking.openURL(url);
-  // };
-
-
-
-  // const handleTagPress = (tag) => {
-  //   // Check if the tag is already active
-  //   const index = activeTags.indexOf(tag);
-  //   if (index !== -1) {
-  //     // Tag is active, remove it
-  //     setActiveTags(activeTags.filter((item) => item !== tag));
-  //     console.log(`Tag '${tag}' deactivated`);
-  //   } else {
-  //     // Tag is not active, add it
-  //     setActiveTags([...activeTags, tag]);
-  //     console.log(`Tag '${tag}' activated`);
-  //   }
-  // };
-
-  // const { user } = useAuth();
-
-  // useEffect(() => {
-  //   console.log("logged in! ", user?.displayName);
-  //   if (!user) router.replace("auth/login");
-  // });
-
-
 
   return (
     <View style={styles.container}>
@@ -213,113 +131,6 @@ export default function HomePage() {
               );
             })}
 
-            {/* Tags */}
-            {/* <View style={styles.tagContainer}> */}
-              {/* <View style={styles.text}> */}
-                {/* <Text
-                  style={{ color: "#333A73", fontSize: 24, fontWeight: "bold" }}
-                >
-                  What are you in the{" "}
-                </Text>
-                <Text
-                  style={{ color: "#FBA834", fontSize: 24, fontWeight: "bold" }}
-                >
-                  mood
-                </Text>
-                <Text
-                  style={{ color: "#333A73", fontSize: 24, fontWeight: "bold" }}
-                >
-                  {" "}
-                  for?
-                </Text> */}
-              {/* </View> */}
-              {/* <View style={styles.container}> */}
-                {/* <TouchableOpacity
-                  style={[
-                    styles.button,
-                    activeTags.includes("meal") && styles.activeButton,
-                  ]}
-                  onPress={() => handleTagPress("meal")}
-                >
-                  <Text
-                    style={[
-                      styles.buttonText,
-                      activeTags.includes("meal") && styles.activeButtonText,
-                    ]}
-                  >
-                    meal
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[
-                    styles.button,
-                    activeTags.includes("spicy") && styles.activeButton,
-                  ]}
-                  onPress={() => {
-                    toggleCategoryFilter('Spicy')
-                  }}
-                >
-                  <Text
-                    style={[
-                      styles.buttonText,
-                      activeTags.includes("spicy") && styles.activeButtonText,
-                    ]}
-                  >
-                    spicy
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[
-                    styles.button,
-                    activeTags.includes("noodles") && styles.activeButton,
-                  ]}
-                  onPress={() => {
-                    toggleCategoryFilter('Noodles')
-                  }}
-                >
-                  <Text
-                    style={[
-                      styles.buttonText,
-                      activeTags.includes("noodles") && styles.activeButtonText,
-                    ]}
-                  >
-                    noodles
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[
-                    styles.button,
-                    activeTags.includes("soup") && styles.activeButton,
-                  ]}
-                  onPress={() => handleTagPress("soup")}
-                >
-                  <Text
-                    style={[
-                      styles.buttonText,
-                      activeTags.includes("soup") && styles.activeButtonText,
-                    ]}
-                  >
-                    soup
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[
-                    styles.button,
-                    activeTags.includes("dessert") && styles.activeButton,
-                  ]}
-                  onPress={() => toggleCategoryFilter('Sweet')}
-                >
-                  <Text
-                    style={[
-                      styles.buttonText,
-                      activeTags.includes("dessert") && styles.activeButtonText,
-                    ]}
-                  >
-                    dessert
-                  </Text>
-                </TouchableOpacity> */}
-              {/* </View> */}
-            {/* </View> */}
             <Text
               style={{
                 color: "#333A73",
@@ -338,11 +149,6 @@ export default function HomePage() {
 }
 
 const styles = StyleSheet.create({
-  // container: {
-  //   flex: 1,
-  //   height: "100%",
-  //   width: "100%",
-  // },
   header: {
     width: "100%",
     position: "relative",
@@ -415,7 +221,7 @@ const styles = StyleSheet.create({
     color: "white",
   },
   cookingpot: {
-    marginTop: 10,
+    marginTop: 145,
     marginBottom: 5,
     alignSelf: "center",
   },

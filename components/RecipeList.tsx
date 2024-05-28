@@ -3,8 +3,7 @@ import React from "react";
 import RecipeCard from "./RecipeCard";
 
 export default function RecipeList({ recipes, ingredient }) {
-  
-  console.log(recipes)
+
   
   return (
     <View >

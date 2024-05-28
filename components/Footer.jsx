@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   icon: {
     width: 30,
     height: 30,
-    marginBottom: 2, // Add some spacing between icon and text
+    marginBottom: 2,
   },
   text: {
     color: "white",
