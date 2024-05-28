@@ -8,7 +8,7 @@ import {
   Image,
   Pressable,
 } from "react-native";
-import { Link, useRouter } from "expo-router"; // corrected import
+import { Link, useRouter } from "expo-router";
 import { createUser } from "../../utils/firebase";
 
 export default function SignUp() {
@@ -16,12 +16,12 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const router = useRouter(); // corrected initialization
+  const router = useRouter();
 
   const createAccount = async () => {
     try {
       console.log(name, email, password, confirmPassword);
-      // validate email
+      
       if (email.split("@").length !== 2) {
         alert("Invalid email address");
         return;
@@ -30,7 +30,7 @@ export default function SignUp() {
         alert("Invalid email address");
         return;
       }
-      // validate password
+      
       if (password.length < 8) {
         alert("Password must be at least 8 characters"); 
         return;
@@ -117,25 +117,6 @@ export default function SignUp() {
             </Text>
           </Link>
         </View>
-      </View>
-
-      <Text>Or continue with</Text>
-      <View style={styles.iconContainer}>
-        <TouchableOpacity key="fb" style={styles.iconWrapper}>
-          <Image style={styles.icon} source={require("../../assets/fb.png")} />
-        </TouchableOpacity>
-        <TouchableOpacity key="google" style={styles.iconWrapper}>
-          <Image
-            style={styles.icon}
-            source={require("../../assets/google.png")}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity key="apple" style={styles.iconWrapper}>
-          <Image
-            style={styles.icon}
-            source={require("../../assets/apple-logo.png")}
-          />
-        </TouchableOpacity>
       </View>
     </View>
   );

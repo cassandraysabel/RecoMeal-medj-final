@@ -185,7 +185,6 @@ export default function Ingredients() {
           setCreatedIngredients([...createdIngredients, newIngredient]);
 
           setIngredientName("");
-          // setPurchaseDate("");
           setExpirationDate("");
           setDaysUntilExpiration(daysRemaining.toString());
           handleMarkDate(expirationDate);

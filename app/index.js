@@ -9,9 +9,9 @@ const SplashScreen = () => {
     if (middleGifVisible) {
       const timer = setTimeout(() => {
         router.replace('auth/login');
-      }, 3000); //call back is to direct the page to login page and delay is three seconds
+      }, 3000); 
 
-      return () => clearTimeout(timer); // this just cancels the timer
+      return () => clearTimeout(timer); 
     }
   }, [middleGifVisible]);
 
@@ -49,30 +49,30 @@ const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white', // Background color
+    backgroundColor: 'white', 
   },
   fullScreenTouchable: {
     ...StyleSheet.absoluteFillObject,
   },
   gifContainer: {
     position: 'absolute',
-    bottom: 120, // Slightly above center vertically
+    bottom: 120, 
     left: 0,
     width: '100%',
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'transparent', // Change as needed
+    backgroundColor: 'transparent', 
   },
   middleGifContainer: {
     position: 'absolute',
-    top: 320, // Center vertically
-    left: width / 2 - 100, // Center horizontally
+    top: 320, 
+    left: width / 2 - 100, 
     width: 200,
     height: 200,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'transparent', // Change as needed
+    backgroundColor: 'transparent', 
   },
   rmgif: {
     flex: 1,
@@ -80,8 +80,6 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'contain',
     zIndex:1
-    
-    // Adjust this according to your GIF
     
   },
   gif: {

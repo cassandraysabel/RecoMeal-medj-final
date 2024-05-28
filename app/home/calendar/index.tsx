@@ -176,8 +176,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    // justifyContent: "flex-start",
-    // paddingHorizontal: 20,
   },
   header: {
     width: "100%",
@@ -331,11 +329,6 @@ const styles = StyleSheet.create({
   icons: {
     alignItems: "center",
   },
-
-  // descriptionText: {
-  //   fontSize: 10,
-  //   color: "white",
-  // },
 
   descriptions: {
     flexDirection: "row",

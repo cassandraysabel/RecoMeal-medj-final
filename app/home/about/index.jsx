@@ -4,7 +4,7 @@ import { View, Text, Image, TextInput, TouchableOpacity, FlatList, StyleSheet, L
 const About = () => {
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
-  const [isTyping, setIsTyping] = useState(false); // Track if the user is typing
+  const [isTyping, setIsTyping] = useState(false); 
 
   const developers = [
     { id: 1, name: 'Cassandra Ysabel Gallo', email: 'cassandraysabel.gallo-21@cpu.edu.ph', image: require('../../../assets/cassy.jpg') },
@@ -16,21 +16,19 @@ const About = () => {
 
   const handleCommentChange = (text) => {
     setComment(text);
-    setIsTyping(text.length > 0); // Set isTyping to true if text is not empty
+    setIsTyping(text.length > 0); 
   };
 
   const handleSubmitComment = () => {
-    // Send feedback via email
     sendFeedback(comment);
 
-    // Update local state
+
     setComments([...comments, { text: comment }]);
     setComment('');
-    setIsTyping(false); // Reset isTyping after submitting comment
+    setIsTyping(false); 
   };
 
   const sendFeedback = (feedback) => {
-    // Here you can implement the logic to send feedback via email
     const email = 'recomeal@gmail.com';
     const subject = 'Feedback';
     const body = `Feedback: ${feedback}`;
@@ -67,7 +65,7 @@ const About = () => {
         placeholder="Leave a comment..."
         style={styles.input}
       />
-      {isTyping && ( // Render comment container only if typing
+      {isTyping && (
         <View style={styles.commentContainer}>
           <FlatList
             data={comments}
@@ -99,14 +97,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
-    marginTop: 23, // Adjusted top margin
+    marginTop: 23,
   },
   feedback: {
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
-    marginTop: 23, // Adjusted top margin
+    marginTop: 23,
   },
   developersContainer: {
     marginBottom: 20,
@@ -139,7 +137,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     width: '100%',
     borderRadius: 10,
-    color:'black', // Changed to match other styles
+    color:'black', 
   },
   commentContainer: {
     borderWidth: 1,
@@ -149,7 +147,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   commentTextContainer: {
-    padding: 10, // Removed border here
+    padding: 10, 
     marginVertical: 5,
     width: '100%',
   },
@@ -161,7 +159,7 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
     paddingHorizontal: 14,
     borderRadius: 5,
-    alignSelf: 'flex-end', // Align button to the right
+    alignSelf: 'flex-end', 
     marginBottom: 60
   },
   submitButtonText: {

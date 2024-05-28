@@ -18,7 +18,6 @@ import { setData } from "../../../utils/asyncstorage";
 
 
 export default function FavoritesScreen() {
-  // const [favorites, setFavorites] = useState(favoriteRecipes);
   const { favoriteRecipes, setFavoriteRecipes } = useDataContext();
   const removeFromFavorites = (recipe) => {
     const updatedFavorites = favoriteRecipes.filter(
@@ -43,7 +42,7 @@ export default function FavoritesScreen() {
         }
       <FlatList
         data={favoriteRecipes}
-        keyExtractor={(item) => item.id || Math.random().toString()} // Ensure unique key
+        keyExtractor={(item) => item.id || Math.random().toString()} 
         renderItem={({ item }) => (
           <View>
             <View style={{ flexDirection: "row" }}>
@@ -54,7 +53,6 @@ export default function FavoritesScreen() {
                     style={{ resizeMode: "contain", width: 30, height: 30 }}
                   />
                 </TouchableOpacity>
-                {/* Check if recipe exists before accessing properties */}
                 {item.recipe && (
                   <Image
                     source={{ uri: item.recipe.image }}
@@ -70,7 +68,6 @@ export default function FavoritesScreen() {
                   maxWidth: 250,
                 }}
               >
-                {/* Check if recipe exists before accessing label */}
                 {item.recipe && (
                   <Text
                     style={{
@@ -106,7 +103,7 @@ export default function FavoritesScreen() {
                   height: 23,
                   backgroundColor: "#F5D491",
                 }}
-                onPress={() => openRecipeUrl(item.recipe.url)} // Check if recipe exists before accessing url
+                onPress={() => openRecipeUrl(item.recipe.url)}
               >
                 <Text
                   style={{ color: "black", fontSize: 11, fontWeight: "500" }}
@@ -148,7 +145,6 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#fff",
     alignItems: "center",
-    // justifyContent: "flex-start",
   
   },
   header: {
@@ -204,7 +200,7 @@ const styles = StyleSheet.create({
   icons: {
     flexDirection: "row",
     justifyContent: "space-around",
-    paddingVertical: 10, // Add some padding for visual appeal
+    paddingVertical: 10,
   },
   descriptions: {
     flexDirection: "row",
