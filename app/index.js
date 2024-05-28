@@ -25,7 +25,6 @@ const SplashScreen = () => {
       <TouchableOpacity style={styles.fullScreenTouchable} onPress={handlePress}>
         {gifVisible && (
           <View style={styles.gifContainer}>
-       
             <Image
               source={require('../assets/RecoMeal.gif')}
               style={styles.rmgif}

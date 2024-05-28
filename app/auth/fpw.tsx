@@ -12,7 +12,6 @@ import { router } from "expo-router";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../utils/firebase";
 
-// Mock function for generating a random verification code
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
